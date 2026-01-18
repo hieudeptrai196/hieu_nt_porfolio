@@ -10,6 +10,7 @@ import Projects from './components/Projects';
 import ScrollToTop from './components/ScrollToTop';
 import Cat from './components/Cat';
 import Welcome from './components/Welcome';
+import FloatingContact from './components/FloatingContact';
 
 // Create Language Context
 const LanguageContext = createContext();
@@ -38,6 +39,7 @@ function App() {
         <main>
             <Navbar />
             <ScrollToTop />
+            <FloatingContact />
             <Cat />
             
             <Routes>
