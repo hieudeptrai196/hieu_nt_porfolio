@@ -145,7 +145,18 @@ export const content = {
         }
       ]
     },
-    footer: "Copyright © 2026 HieuNguyen. All Rights Reserved"
+    footer: "Copyright © 2026 HieuNguyen. All Rights Reserved",
+    search: {
+      title: "Tìm kiếm",
+      subtitle: "Sử dụng sức mạnh của Google Search API",
+      placeholder: "Nhập từ khóa tìm kiếm (VD: React, VNPT...)",
+      button: "Tìm kiếm",
+      loading: "Đang tìm kiếm...",
+      noResults: "Không tìm thấy kết quả nào.",
+      error: "Đã xảy ra lỗi khi tìm kiếm.",
+      prev: "Trước",
+      next: "Sau"
+    }
   },
   en: {
     hero: {
@@ -293,6 +304,17 @@ export const content = {
         }
       ]
     },
-    footer: "Copyright © 2026 HieuNguyen. All Rights Reserved"
+    footer: "Copyright © 2026 HieuNguyen. All Rights Reserved",
+    search: {
+      title: "Search",
+      subtitle: "Powered by Google Search API",
+      placeholder: "Enter keywords (e.g. React, VNPT...)",
+      button: "Search",
+      loading: "Searching...",
+      noResults: "No results found.",
+      error: "An error occurred while searching.",
+      prev: "Prev",
+      next: "Next"
+    }
   }
 };

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom'; // Import useSearchParams
+import { useSearchParams } from 'react-router-dom'; 
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaSearch, FaChevronLeft, FaChevronRight, FaGlobeAmericas } from 'react-icons/fa';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // MOCK DATA for demonstration when API limits are hit or no key is provided
 const MOCK_DATA = [
@@ -38,6 +39,7 @@ const MOCK_DATA = [
 ];
 
 const Search = () => {
+    const { t } = useLanguage();
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -63,7 +65,7 @@ const Search = () => {
 
         try {
             // Check if user has replaced the placeholder keys
-            if (API_KEY === 'YOUR_GOOGLE_API_KEY_HERE') {
+            if (!API_KEY || API_KEY === 'YOUR_GOOGLE_API_KEY_HERE') {
                 // Simulate network delay for realistic feel
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 
@@ -84,7 +86,7 @@ const Search = () => {
             }
         } catch (err) {
             console.error("Search failed:", err);
-            setError("Đã xảy ra lỗi khi tìm kiếm (hoặc chưa cấu hình API Key). Đang hiển thị dữ liệu mẫu.");
+            setError(`${t.search.error} (API Key missing or limit exceeded).`);
             setResults(MOCK_DATA); // Fallback to mock data on error
         } finally {
             setLoading(false);
@@ -97,6 +99,7 @@ const Search = () => {
             setQuery(q);
             executeSearch(q, 1);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams]);
 
     const handleSearch = (pageNum = 1) => {
@@ -118,21 +121,20 @@ const Search = () => {
                 animate={{ opacity: 1, y: 0 }}
                 style={styles.contentWrapper}
             >
-                <h1 style={styles.title}>Tìm kiếm thông minh</h1>
-                <p style={styles.subtitle}>Sử dụng sức mạnh của Google Search API</p>
+                <h1 style={styles.title}>{t.search.title}</h1>
 
                 <div style={styles.searchBox}>
                     <FaSearch style={styles.searchIcon} />
                     <input 
                         type="text" 
-                        placeholder="Nhập từ khóa tìm kiếm (VD: React, VNPT...)" 
+                        placeholder={t.search.placeholder} 
                         style={styles.input}
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
                     <button onClick={() => handleSearch(1)} style={styles.button}>
-                        Tìm kiếm
+                        {t.search.button}
                     </button>
                 </div>
 
@@ -142,7 +144,7 @@ const Search = () => {
                         animate={{ opacity: 1 }}
                         style={styles.loading}
                     >
-                        <div className="spinner"></div> Đang tìm kiếm...
+                        <div className="spinner"></div> {t.search.loading}
                     </motion.div>
                 )}
 
@@ -173,7 +175,7 @@ const Search = () => {
                     </AnimatePresence>
 
                     {searched && results.length === 0 && !loading && (
-                        <p style={styles.noResults}>Không tìm thấy kết quả nào.</p>
+                        <p style={styles.noResults}>{t.search.noResults}</p>
                     )}
                 </div>
 
@@ -184,14 +186,14 @@ const Search = () => {
                             onClick={() => handleSearch(page - 1)}
                             style={{...styles.pageBtn, opacity: page === 1 ? 0.5 : 1}}
                         >
-                            <FaChevronLeft /> Trước
+                            <FaChevronLeft /> {t.search.prev}
                         </button>
-                        <span style={styles.pageNumber}>Trang {page}</span>
+                        <span style={styles.pageNumber}>Page {page}</span>
                         <button 
                             onClick={() => handleSearch(page + 1)}
                             style={styles.pageBtn}
                         >
-                            Sau <FaChevronRight />
+                            {t.search.next} <FaChevronRight />
                         </button>
                     </div>
                 )}
