@@ -45,8 +45,9 @@ const Navbar = () => {
     e.preventDefault();
     const query = e.target.elements.search.value;
     if (query.trim()) {
-      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+      navigate(`/search?q=${encodeURIComponent(query)}`);
       e.target.reset();
+      setIsOpen(false);
     }
   };
 

@@ -20,6 +20,7 @@ import CalculatorWidget from './components/CalculatorWidget';
 import MusicWidget from './components/MusicWidget';
 import NuoiHieu from './components/NuoiHieu';
 import TetCountdownPopup from './components/TetCountdownPopup'; // TEMPORARY
+import Search from './components/Search';
 import { LanguageProvider } from './contexts/LanguageContext';
 
 const Home = () => {
@@ -49,6 +50,7 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/nuoi-hieu" element={<NuoiHieu />} />
+          <Route path="/search" element={<Search />} />
       </Routes>
       
       {isHome && <WeatherNotification />}
