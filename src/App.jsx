@@ -19,6 +19,7 @@ import TranslateWidget from './components/TranslateWidget';
 import CalculatorWidget from './components/CalculatorWidget';
 import MusicWidget from './components/MusicWidget';
 import NuoiHieu from './components/NuoiHieu';
+import TetCountdownPopup from './components/TetCountdownPopup'; // TEMPORARY
 import { LanguageProvider } from './contexts/LanguageContext';
 
 const Home = () => {
@@ -57,6 +58,7 @@ function AppContent() {
       <CalculatorWidget /> */}
       <MusicWidget onPlayStateChange={setIsMusicPlaying} />
       <Footer />
+      <TetCountdownPopup /> {/* TEMPORARY */}
     </>
   );
 }
