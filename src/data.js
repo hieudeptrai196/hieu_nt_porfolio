@@ -4,6 +4,7 @@ export const content = {
       greeting: "Xin chào, tôi là",
       role: "Lập trình viên Backend & Kỹ sư phần mềm",
       cta: "Xem dự án",
+      about: "Tôi là một người đam mê sáng tạo và luôn tìm kiếm sự hoàn hảo. Với tư duy cởi mở và tinh thần trách nhiệm cao, tôi luôn nỗ lực không ngừng để mang lại những giá trị tốt nhất. Tôi yêu thích việc giải quyết các vấn đề khó, luôn sẵn sàng học hỏi cái mới và chia sẻ kiến thức với mọi người xung quanh."
     },
     nav: {
       home: "Trang chủ",
@@ -151,6 +152,7 @@ export const content = {
       greeting: "Hello, I'm",
       role: "Backend Developer & Software Engineer",
       cta: "View Projects",
+      about: "I am a passionate creator who always strives for perfection. With an open mind and a strong sense of responsibility, I continuously endeavor to deliver the best value. I love solving difficult problems, am always ready to learn new things, and enjoy sharing knowledge with those around me."
     },
     nav: {
       home: "Home",

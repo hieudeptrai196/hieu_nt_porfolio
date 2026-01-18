@@ -22,11 +22,18 @@ const Hero = () => {
         <p className="hero-description">
           {t.hero.role}
         </p>
+        
+        <motion.p 
+          className="hero-about"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          style={{ maxWidth: '800px', margin: '20px auto', fontSize: '1.1rem', lineHeight: '1.6', color: 'var(--text-secondary)' }}
+        >
+          {t.hero.about}
+        </motion.p>
 
         <div className="social-links">
-            <a href="https://facebook.com/hieu19620" target="_blank" rel="noopener noreferrer" className="glass-card social-icon">
-                <FaFacebook color="#1877F2" />
-            </a>
             <a href="mailto:hieulatoi1962@gmail.com" className="glass-card social-icon">
                 <FaEnvelope color="#EA4335" />
             </a>
