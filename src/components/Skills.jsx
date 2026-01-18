@@ -73,12 +73,6 @@ const Skills = () => {
                 {skill.icon || skill.name.substring(0, 2)}
               </div>
               <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>{skill.name}</h3>
-              
-              {!skill.isSpecial && (
-                <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '5px' }}>
-                    <div style={{ width: `${skill.level}%`, height: '100%', background: skill.color, borderRadius: '2px' }}></div>
-                </div>
-              )}
             </div>
           ))}
         </div>
@@ -149,13 +143,6 @@ const Skills = () => {
                              {skill.icon || skill.name.substring(0, 2)}
                             </div>
                             <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', textAlign: 'center' }}>{skill.name}</h3>
-                            {!skill.isSpecial && (
-                                <div className="progress-bar">
-                                    <div 
-                                        style={{ width: `${skill.level}%`, height: '100%', backgroundColor: skill.color }}
-                                    />
-                                </div>
-                            )}
                         </div>
                         ))}
                     </div>
