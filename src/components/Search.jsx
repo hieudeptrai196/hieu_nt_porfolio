@@ -38,8 +38,45 @@ const MOCK_DATA = [
     }
 ];
 
+const SkeletonCard = () => (
+    <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        style={styles.resultCard}
+    >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+            <motion.div 
+                animate={{ opacity: [0.3, 0.6, 0.3] }} 
+                transition={{ duration: 1.5, repeat: Infinity }}
+                style={{ width: '16px', height: '16px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)' }} 
+            />
+            <motion.div 
+                animate={{ opacity: [0.3, 0.6, 0.3] }} 
+                transition={{ duration: 1.5, repeat: Infinity }}
+                style={{ width: '120px', height: '14px', borderRadius: '4px', background: 'rgba(255,255,255,0.1)' }} 
+            />
+        </div>
+        <motion.div 
+            animate={{ opacity: [0.3, 0.6, 0.3] }} 
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+            style={{ width: '60%', height: '24px', borderRadius: '4px', background: 'rgba(255,255,255,0.15)', marginBottom: '12px' }} 
+        />
+        <motion.div 
+            animate={{ opacity: [0.3, 0.6, 0.3] }} 
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
+            style={{ width: '100%', height: '16px', borderRadius: '4px', background: 'rgba(255,255,255,0.1)', marginBottom: '8px' }} 
+        />
+        <motion.div 
+            animate={{ opacity: [0.3, 0.6, 0.3] }} 
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
+            style={{ width: '80%', height: '16px', borderRadius: '4px', background: 'rgba(255,255,255,0.1)' }} 
+        />
+    </motion.div>
+);
+
 const Search = () => {
-    const { t } = useLanguage();
+    const { t, lang } = useLanguage();
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -66,11 +103,12 @@ const Search = () => {
         try {
             // Check if user has replaced the placeholder keys
             if (!API_KEY || API_KEY === 'YOUR_GOOGLE_API_KEY_HERE') {
-                // Simulate network delay for realistic feel
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                console.warn("Using Mock Data. Please provide valid Google API Key and CX.");
-                setResults(MOCK_DATA);
+                setLoading(false);
+                setError(lang === 'vi' 
+                    ? "Thiếu API Key. Vui lòng kiểm tra cấu hình." 
+                    : "Missing API Key. Please check configuration.");
+                setResults([]);
+                return;
             } else {
                 const response = await fetch(
                     `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(searchQuery)}&start=${startIndex}`
@@ -86,8 +124,11 @@ const Search = () => {
             }
         } catch (err) {
             console.error("Search failed:", err);
-            setError(`${t.search.error} (API Key missing or limit exceeded).`);
-            setResults(MOCK_DATA); // Fallback to mock data on error
+            // Show friendly localized error message
+            setError(lang === 'vi' 
+                ? "API Key đã đạt giới hạn hoặc gặp lỗi. Bạn vui lòng quay lại sau nhé!" 
+                : "API Key limit reached or error occurred. Please try again later!");
+            setResults([]); 
         } finally {
             setLoading(false);
         }
@@ -138,40 +179,46 @@ const Search = () => {
                     </button>
                 </div>
 
-                {loading && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        style={styles.loading}
-                    >
-                        <div className="spinner"></div> {t.search.loading}
-                    </motion.div>
-                )}
-
                 {error && <div style={styles.error}>{error}</div>}
 
                 <div style={styles.resultsContainer}>
                     <AnimatePresence mode='wait'>
-                        {!loading && results.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ delay: index * 0.1 }}
-                                style={styles.resultCard}
-                                whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.1)' }}
-                            >
-                                <div style={styles.cardHeader}>
-                                    <FaGlobeAmericas style={styles.globeIcon} />
-                                    <span style={styles.siteName}>{item.displayLink}</span>
-                                </div>
-                                <a href={item.link} target="_blank" rel="noopener noreferrer" style={styles.linkTitle}>
-                                    {item.title}
-                                </a>
-                                <p style={styles.snippet}>{item.snippet}</p>
-                            </motion.div>
-                        ))}
+                        {loading ? (
+                           <motion.div
+                                key="skeleton"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}
+                           >
+                                {Array.from({ length: 5 }).map((_, i) => (
+                                    <SkeletonCard key={i} />
+                                ))}
+                           </motion.div>
+                        ) : (
+                            <>
+                                {results.map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ delay: index * 0.05 }}
+                                        style={styles.resultCard}
+                                        whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                                    >
+                                        <div style={styles.cardHeader}>
+                                            <FaGlobeAmericas style={styles.globeIcon} />
+                                            <span style={styles.siteName}>{item.displayLink}</span>
+                                        </div>
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer" style={styles.linkTitle}>
+                                            {item.title}
+                                        </a>
+                                        <p style={styles.snippet}>{item.snippet}</p>
+                                    </motion.div>
+                                ))}
+                            </>
+                        )}
                     </AnimatePresence>
 
                     {searched && results.length === 0 && !loading && (

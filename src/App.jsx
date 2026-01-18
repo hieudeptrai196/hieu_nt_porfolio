@@ -12,7 +12,6 @@ import ScrollToTop from './components/ScrollToTop';
 import Cat from './components/Cat';
 import Welcome from './components/Welcome';
 
-import FloatingContact from './components/FloatingContact';
 import Protect from './components/Protect';
 import WeatherNotification from './components/WeatherNotification';
 import TranslateWidget from './components/TranslateWidget';
@@ -21,6 +20,7 @@ import MusicWidget from './components/MusicWidget';
 import NuoiHieu from './components/NuoiHieu';
 import TetCountdownPopup from './components/TetCountdownPopup'; // TEMPORARY
 import Search from './components/Search';
+import ChatWidget from './components/ChatWidget';
 import { LanguageProvider } from './contexts/LanguageContext';
 
 const Home = () => {
@@ -54,11 +54,11 @@ function AppContent() {
       </Routes>
       
       {isHome && <WeatherNotification />}
-      <FloatingContact />
       <Cat isPlaying={isMusicPlaying} />
       {/* <TranslateWidget />
       <CalculatorWidget /> */}
       <MusicWidget onPlayStateChange={setIsMusicPlaying} />
+      <ChatWidget />
       <Footer />
       <TetCountdownPopup /> {/* TEMPORARY */}
     </>
