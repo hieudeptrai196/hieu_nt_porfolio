@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useLanguage } from '../App';
+import { useLanguage } from '../contexts/LanguageContext';
 import { FaGem, FaCar, FaHome, FaHeart } from 'react-icons/fa';
 
 const NuoiHieu = () => {

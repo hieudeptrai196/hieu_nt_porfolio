@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLanguage } from '../App';
+import { useLanguage } from '../contexts/LanguageContext';
 import { FaTimes, FaPlusCircle, FaPhp, FaLaravel, FaNodeJs, FaReact, FaVuejs, FaPython, FaJava, FaDocker, FaGitAlt, FaAngular } from 'react-icons/fa';
 import { SiMysql, SiRedis, SiPostman, SiVercel } from 'react-icons/si';
 

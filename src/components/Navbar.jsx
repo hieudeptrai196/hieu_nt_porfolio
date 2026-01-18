@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLanguage } from '../App';
+import { useLanguage } from '../contexts/LanguageContext';
 import confetti from 'canvas-confetti';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { FaSearch } from 'react-icons/fa'; // Added FaSearch import

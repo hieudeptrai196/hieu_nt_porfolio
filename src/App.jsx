@@ -1,6 +1,5 @@
-import { useState, createContext, useContext } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { content } from './data';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
@@ -20,11 +19,7 @@ import TranslateWidget from './components/TranslateWidget';
 import CalculatorWidget from './components/CalculatorWidget';
 import MusicWidget from './components/MusicWidget';
 import NuoiHieu from './components/NuoiHieu';
-
-// Create Language Context
-const LanguageContext = createContext();
-
-export const useLanguage = () => useContext(LanguageContext);
+import { LanguageProvider } from './contexts/LanguageContext';
 
 const Home = () => {
     return (
@@ -39,10 +34,7 @@ const Home = () => {
     );
 };
 
-import { useLocation } from 'react-router-dom';
-
 function AppContent() {
-  const { lang, t, setLang } = useLanguage();
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -70,15 +62,12 @@ function AppContent() {
 }
 
 function App() {
-  const [lang, setLang] = useState('vi'); 
-  const t = content[lang];
-
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
+    <LanguageProvider>
       <BrowserRouter>
         <AppContent />
       </BrowserRouter>
-    </LanguageContext.Provider>
+    </LanguageProvider>
   );
 }
 

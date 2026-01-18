@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useLanguage } from '../App';
+import { useLanguage } from '../contexts/LanguageContext';
 import { FaTrophy, FaMedal } from 'react-icons/fa';
 
 const Awards = () => {

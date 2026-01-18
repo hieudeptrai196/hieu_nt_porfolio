@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaFacebook, FaEnvelope } from 'react-icons/fa';
-import { useLanguage } from '../App';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Hero = () => {
   const { t } = useLanguage();

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FaMusic, FaTimes, FaPlay, FaYoutube } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { useLanguage } from '../App';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Move helper components outside to avoid "created during render" error
 const WaveRipple = () => (

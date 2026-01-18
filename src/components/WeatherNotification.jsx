@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaSun, FaCloud, FaCloudRain, FaSnowflake, FaBolt, FaSmog, FaTimes, FaQuoteLeft, FaClock } from 'react-icons/fa';
-import { useLanguage } from '../App';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const defaultLocation = { lat: 21.0285, lon: 105.8542, name: 'Hanoi' };
 
@@ -46,8 +46,22 @@ const WeatherNotification = () => {
   }, [lang]);
 
   useEffect(() => {
+    const handleScroll = () => {
+        // Close widgets immediately on scroll
+        if (window.scrollY > 10) {
+            setShowWeather(false);
+            setShowClock(false);
+            setShowQuote(false);
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timer);
+    return () => {
+        clearInterval(timer);
+        window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const formatDate = (date) => {
@@ -133,7 +147,7 @@ const WeatherNotification = () => {
                 borderRadius: showWeather ? '15px' : '50%',
                 backgroundColor: showWeather ? 'rgba(15, 23, 42, 0.4)' : 'rgba(15, 23, 42, 0.6)'
             }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+            transition={{ duration: 0 }}
             className="glass-card"
             style={{
                 border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -210,7 +224,7 @@ const WeatherNotification = () => {
                 borderRadius: showClock ? '15px' : '50%',
                 backgroundColor: showClock ? 'rgba(15, 23, 42, 0.4)' : 'rgba(15, 23, 42, 0.6)'
             }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+            transition={{ duration: 0 }}
             className="glass-card"
             style={{
                 border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -326,7 +340,7 @@ const WeatherNotification = () => {
                 borderRadius: showQuote ? '15px' : '50%',
                 backgroundColor: showQuote ? 'rgba(15, 23, 42, 0.4)' : 'rgba(15, 23, 42, 0.6)'
             }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+            transition={{ duration: 0 }}
             className="glass-card"
             style={{
                 border: '1px solid rgba(255, 255, 255, 0.1)',
