@@ -6,21 +6,46 @@ import { useLanguage } from '../App';
 const Cat = ({ isPlaying }) => {
   const [showBubble, setShowBubble] = useState(false);
   const [noiseMessage, setNoiseMessage] = useState(false);
+  const [currentLoudMsg, setCurrentLoudMsg] = useState('');
   const timeoutRef = useRef(null);
   const { lang } = useLanguage();
+
+  const sleepMsg = lang === 'vi' ? "Đang ngủ, đừng gọi tôi dậy! 😴" : "Sleeping, don't wake me up! 😴";
+  
+  const loudMessages = {
+    vi: [
+        "Nhạc to quá, tắt nhạc đi! 😾",
+        "Tôi không ngủ được! 🙀",
+        "Ai bật nhạc thế? 😿",
+        "Đau đầu quá đi... 😿",
+        "Tắt loa giùm cái! 🚫🔊",
+        "Chill vừa thôi sếp ơi! 🎵😡"
+    ],
+    en: [
+        "Music is too loud, turn it off! 😾",
+        "I can't sleep! 🙀",
+        "Who turned this on? 😿",
+        "My head hurts... 😿",
+        "Turn off the speakers! 🚫🔊",
+        "Too much chill, boss! 🎵😡"
+    ]
+  };
 
   useEffect(() => {
     let interval;
     if (isPlaying) {
       interval = setInterval(() => {
         if (!showBubble) {
+          const msgs = loudMessages[lang];
+          const randomMsg = msgs[Math.floor(Math.random() * msgs.length)];
+          setCurrentLoudMsg(randomMsg);
           setNoiseMessage(true);
           setTimeout(() => setNoiseMessage(false), 3000);
         }
-      }, 8000); // Check every 8 seconds
+      }, 7000); // Check every 7 seconds
     }
     return () => clearInterval(interval);
-  }, [isPlaying, showBubble]);
+  }, [isPlaying, showBubble, lang]);
 
   const handleCatClick = () => {
     setNoiseMessage(false);
@@ -32,8 +57,7 @@ const Cat = ({ isPlaying }) => {
     }, 3000);
   };
 
-  const sleepMsg = lang === 'vi' ? "Đang ngủ, đừng gọi tôi dậy!" : "Sleeping, don't wake me up!";
-  const loudMsg = lang === 'vi' ? "Nhạc to quá, tắt nhạc đi! 😾" : "Music is too loud, turn it off! 😾";
+  const currentMsg = noiseMessage ? currentLoudMsg : sleepMsg;
 
   return (
     <motion.div
@@ -72,11 +96,11 @@ const Cat = ({ isPlaying }) => {
                         fontWeight: 'bold',
                         width: 'max-content',
                         maxWidth: '200px',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
                         pointerEvents: 'none'
                     }}
                 >
-                    {noiseMessage ? loudMsg : sleepMsg}
+                    {currentMsg}
                     <div style={{
                         position: 'absolute',
                         bottom: '-6px',

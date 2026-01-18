@@ -5,29 +5,29 @@ import { useLanguage } from '../App';
 
 // Move helper components outside to avoid "created during render" error
 const WaveRipple = () => (
-    <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+    <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', overflow: 'visible' }}>
         <motion.div
-            initial={{ scale: 0.8, opacity: 0.6 }}
-            animate={{ scale: 1.4, opacity: 0 }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeOut" }}
+            initial={{ scale: 0.9, opacity: 0.4 }}
+            animate={{ scale: 1.3, opacity: 0 }}
+            transition={{ repeat: Infinity, duration: 2.5, ease: [0.4, 0, 0.2, 1] }}
             style={{
                 position: 'absolute',
                 width: '100%',
                 height: '100%',
                 borderRadius: '50%',
-                border: '1px solid #F472B6'
+                border: '1px solid rgba(244, 114, 182, 0.4)'
             }}
         />
         <motion.div
-            initial={{ scale: 0.8, opacity: 0.4 }}
-            animate={{ scale: 1.8, opacity: 0 }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeOut", delay: 1 }}
+            initial={{ scale: 0.9, opacity: 0.3 }}
+            animate={{ scale: 1.6, opacity: 0 }}
+            transition={{ repeat: Infinity, duration: 2.5, ease: [0.4, 0, 0.2, 1], delay: 1.25 }}
             style={{
                 position: 'absolute',
                 width: '100%',
                 height: '100%',
                 borderRadius: '50%',
-                border: '1px solid #F472B6'
+                border: '1px solid rgba(244, 114, 182, 0.3)'
             }}
         />
     </div>
@@ -39,6 +39,7 @@ const MusicWidget = ({ onPlayStateChange }) => {
   const [url, setUrl] = useState('');
   const [videoSrc, setVideoSrc] = useState('');
   const [videoTitle, setVideoTitle] = useState('');
+  const [isHovered, setIsHovered] = useState(false);
   const playerRef = useRef(null);
 
   const t = {
@@ -85,10 +86,10 @@ const MusicWidget = ({ onPlayStateChange }) => {
   const handlePlay = async () => {
     const videoId = getYoutubeId(url);
     if (videoId) {
-        setVideoSrc(`https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1`);
+        const newSrc = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1`;
+        setVideoSrc(newSrc);
         onPlayStateChange(true);
         
-        // Fetch Video Title
         try {
             const response = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
             const data = await response.json();
@@ -101,10 +102,11 @@ const MusicWidget = ({ onPlayStateChange }) => {
     }
   };
 
-  // Attach API listener when videoSrc changes
+  // Attach API listener
   useEffect(() => {
+    let interval;
     if (videoSrc) {
-        const interval = setInterval(() => {
+        interval = setInterval(() => {
             if (window.YT && window.YT.Player) {
                 const iframes = document.getElementsByTagName('iframe');
                 for (let iframe of iframes) {
@@ -126,8 +128,8 @@ const MusicWidget = ({ onPlayStateChange }) => {
                 }
             }
         }, 1000);
-        return () => clearInterval(interval);
     }
+    return () => clearInterval(interval);
   }, [videoSrc, onPlayStateChange]);
 
   return (
@@ -136,25 +138,26 @@ const MusicWidget = ({ onPlayStateChange }) => {
           {/* Tooltip on Hover if Playing */}
           {videoSrc && (
               <div 
-                  className="music-tooltip"
                   style={{
                       position: 'absolute',
                       left: '60px',
                       top: '10px',
-                      background: 'rgba(0,0,0,0.8)',
+                      background: 'rgba(0,0,0,0.85)',
                       padding: '8px 12px',
                       borderRadius: '8px',
                       color: '#fff',
                       fontSize: '0.8rem',
                       whiteSpace: 'nowrap',
                       pointerEvents: 'none',
-                      opacity: 0,
-                      transition: 'opacity 0.3s',
+                      opacity: isHovered ? 1 : 0,
+                      transform: isHovered ? 'translateX(0)' : 'translateX(-10px)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       backdropFilter: 'blur(4px)',
                       border: '1px solid rgba(255,255,255,0.1)',
-                      maxWidth: '200px',
+                      maxWidth: '250px',
                       overflow: 'hidden',
-                      textOverflow: 'ellipsis'
+                      textOverflow: 'ellipsis',
+                      boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
                   }}
               >
                   {videoTitle || "Playing Music 🎵"}
@@ -164,15 +167,17 @@ const MusicWidget = ({ onPlayStateChange }) => {
           <motion.button
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 1.4, type: 'spring' }}
+            transition={{ delay: 0.2, type: 'spring' }}
             onClick={() => setIsOpen(true)}
-            className="glass-card music-btn-hover"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="glass-card"
             style={{
                 width: '50px',
                 height: '50px',
                 borderRadius: '50%',
                 border: videoSrc ? '1px solid #F472B6' : '1px solid rgba(255, 255, 255, 0.1)',
-                background: videoSrc ? 'rgba(244, 114, 182, 0.2)' : 'rgba(15, 23, 42, 0.6)',
+                background: videoSrc ? 'rgba(244, 114, 182, 0.1)' : 'rgba(15, 23, 42, 0.6)',
                 backdropFilter: 'blur(10px)',
                 color: '#F472B6',
                 display: 'flex',
@@ -180,18 +185,11 @@ const MusicWidget = ({ onPlayStateChange }) => {
                 justifyContent: 'center',
                 cursor: 'pointer',
                 position: 'relative',
-                boxShadow: videoSrc ? '0 0 15px rgba(244, 114, 182, 0.5)' : '0 4px 15px rgba(0,0,0,0.3)'
+                boxShadow: videoSrc ? '0 0 20px rgba(244, 114, 182, 0.4)' : '0 4px 15px rgba(0,0,0,0.3)',
+                overflow: 'visible'
             }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onMouseEnter={(e) => {
-                const tooltip = e.currentTarget.parentElement.querySelector('.music-tooltip');
-                if(tooltip) tooltip.style.opacity = 1;
-            }}
-            onMouseLeave={(e) => {
-                const tooltip = e.currentTarget.parentElement.querySelector('.music-tooltip');
-                if(tooltip) tooltip.style.opacity = 0;
-            }}
         >
             {videoSrc && <WaveRipple />}
             <FaMusic size={20} style={{ position: 'relative', zIndex: 1 }} />
@@ -227,7 +225,7 @@ const MusicWidget = ({ onPlayStateChange }) => {
                   width: '90%',
                   maxWidth: '450px',
                   transform: isOpen ? 'scale(1)' : 'scale(0.8)',
-                  transition: 'transform 0.3s ease'
+                  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
               }}
           >
               <button 
@@ -262,6 +260,7 @@ const MusicWidget = ({ onPlayStateChange }) => {
                           padding: '12px', 
                           borderRadius: '10px', 
                           background: 'rgba(255,255,255,0.1)',
+                          border: '1px solid rgba(255,255,255,0.2)',
                           color: 'white',
                           outline: 'none'
                         }}
