@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '../App';
 import confetti from 'canvas-confetti';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { FaSearch } from 'react-icons/fa'; // Added FaSearch import
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -40,6 +41,15 @@ const Navbar = () => {
     }, 250);
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const query = e.target.elements.search.value;
+    if (query.trim()) {
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+      e.target.reset();
+    }
+  };
+
   const scrollToSection = (id) => {
     setIsOpen(false); 
     const element = document.getElementById(id);
@@ -71,12 +81,59 @@ const Navbar = () => {
             transition: 'all 0.3s ease'
         }}
     >
-        <div 
-            className="logo rgb-text" 
-            style={{ fontSize: '1.8rem', fontWeight: 'bold', cursor: 'pointer', letterSpacing: '1px', zIndex: 1001 }}
-            onClick={handleLogoClick}
-        >
-            HieuNguyen
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', zIndex: 1001 }}>
+            <div 
+                className="logo rgb-text" 
+                style={{ fontSize: '1.8rem', fontWeight: 'bold', cursor: 'pointer', letterSpacing: '1px' }}
+                onClick={handleLogoClick}
+            >
+                HieuNguyen
+            </div>
+
+            {/* Google Search Bar */}
+            <form 
+                onSubmit={handleSearch} 
+                style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    background: 'rgba(255, 255, 255, 0.1)', 
+                    borderRadius: '20px', 
+                    padding: '5px 15px', 
+                    backdropFilter: 'blur(5px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    transition: 'all 0.3s'
+                }}
+            >
+                <input 
+                    name="search" 
+                    placeholder="Search Google..." 
+                    autoComplete="off"
+                    style={{ 
+                        background: 'transparent', 
+                        border: 'none', 
+                        color: 'white', 
+                        outline: 'none', 
+                        width: '180px',
+                        fontSize: '0.9rem',
+                        fontFamily: 'inherit'
+                    }} 
+                />
+                <button 
+                    type="submit" 
+                    style={{ 
+                        background: 'transparent', 
+                        border: 'none', 
+                        color: '#ccc', 
+                        cursor: 'pointer', 
+                        display: 'flex', 
+                        alignItems: 'center',
+                        fontSize: '0.9rem',
+                        padding: '0'
+                    }}
+                >
+                    <FaSearch />
+                </button>
+            </form>
         </div>
 
         {/* Language Switcher - Always Visible */}

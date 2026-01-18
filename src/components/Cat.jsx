@@ -1,25 +1,39 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaCat } from 'react-icons/fa';
 import { useLanguage } from '../App';
 
-const Cat = () => {
+const Cat = ({ isPlaying }) => {
   const [showBubble, setShowBubble] = useState(false);
+  const [noiseMessage, setNoiseMessage] = useState(false);
   const timeoutRef = useRef(null);
   const { lang } = useLanguage();
 
+  useEffect(() => {
+    let interval;
+    if (isPlaying) {
+      interval = setInterval(() => {
+        if (!showBubble) {
+          setNoiseMessage(true);
+          setTimeout(() => setNoiseMessage(false), 3000);
+        }
+      }, 8000); // Check every 8 seconds
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying, showBubble]);
+
   const handleCatClick = () => {
+    setNoiseMessage(false);
     setShowBubble(true);
     
-    // Clear existing timeout if clicked repeatedly
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    
     timeoutRef.current = setTimeout(() => {
       setShowBubble(false);
     }, 3000);
   };
 
-  const message = lang === 'vi' ? "Đang ngủ, đừng gọi tôi dậy!" : "Sleeping, don't wake me up!";
+  const sleepMsg = lang === 'vi' ? "Đang ngủ, đừng gọi tôi dậy!" : "Sleeping, don't wake me up!";
+  const loudMsg = lang === 'vi' ? "Nhạc to quá, tắt nhạc đi! 😾" : "Music is too loud, turn it off! 😾";
 
   return (
     <motion.div
@@ -40,7 +54,7 @@ const Cat = () => {
         }}
     >
         <AnimatePresence>
-            {showBubble && (
+            {(showBubble || (isPlaying && noiseMessage)) && (
                 <motion.div
                     initial={{ opacity: 0, y: 10, scale: 0.8 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -62,8 +76,7 @@ const Cat = () => {
                         pointerEvents: 'none'
                     }}
                 >
-                    {message}
-                    {/* Triangle pointer */}
+                    {noiseMessage ? loudMsg : sleepMsg}
                     <div style={{
                         position: 'absolute',
                         bottom: '-6px',
