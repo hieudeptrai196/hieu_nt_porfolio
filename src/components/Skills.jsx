@@ -1,25 +1,26 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../App';
-import { FaTimes, FaPlusCircle } from 'react-icons/fa';
+import { FaTimes, FaPlusCircle, FaPhp, FaLaravel, FaNodeJs, FaReact, FaVuejs, FaPython, FaJava, FaDocker, FaGitAlt } from 'react-icons/fa';
+import { SiMysql, SiRedis, SiPostman } from 'react-icons/si';
 
 const baseSkillList = [
   // Original High Level Skills
-  { name: 'PHP', level: 90, color: '#777BB4' },
-  { name: 'Laravel', level: 85, color: '#FF2D20' },
-  { name: 'MySQL', level: 85, color: '#00758F' },
-  { name: 'Magento', level: 65, color: '#EE672F' },
-  { name: 'Git', level: 85, color: '#F05032' },
+  { name: 'PHP', level: 90, color: '#777BB4', icon: <FaPhp /> },
+  { name: 'Laravel', level: 85, color: '#FF2D20', icon: <FaLaravel /> },
+  { name: 'MySQL', level: 85, color: '#00758F', icon: <SiMysql /> },
+  { name: 'Redis', level: 60, color: '#DC382D', icon: <SiRedis /> },
+  { name: 'Git', level: 85, color: '#F05032', icon: <FaGitAlt /> },
   
   // Updated/New Skills at 50%
-  { name: 'Node.js', level: 50, color: '#68A063' },
-  { name: 'ReactJS', level: 50, color: '#61DAFB' },
-  { name: 'VueJS', level: 50, color: '#4FC08D' },
-  { name: 'Angular', level: 50, color: '#DD0031' },
-  { name: 'HTML', level: 50, color: '#E34F26' },
-  { name: 'CSS', level: 50, color: '#1572B6' },
-  { name: 'Java', level: 50, color: '#007396' },
-  { name: 'Python', level: 50, color: '#3776AB' },
+  { name: 'Node.js', level: 60, color: '#68A063', icon: <FaNodeJs /> },
+  { name: 'ReactJS', level: 60, color: '#61DAFB', icon: <FaReact /> },
+  { name: 'VueJS', level: 60, color: '#4FC08D', icon: <FaVuejs /> },
+  { name: 'HTML', level: 90, color: '#E34F26', icon: <span style={{fontWeight:'bold'}}>HTML</span> },
+  { name: 'CSS', level: 85, color: '#1572B6', icon: <span style={{fontWeight:'bold'}}>CSS</span> },
+  { name: 'Java', level: 65, color: '#007396', icon: <FaJava /> },
+  { name: 'Python', level: 60, color: '#3776AB', icon: <FaPython /> },
+  { name: 'Docker', level: 55, color: '#2496ED', icon: <FaDocker /> },
 ];
 
 const Skills = () => {
@@ -29,7 +30,13 @@ const Skills = () => {
   // Add the "More" item dynamically based on language
   const skillList = [
       ...baseSkillList,
-      { name: t.skills.more, level: 100, color: '#FFD700', isSpecial: true }
+      { 
+          name: t.skills.more, 
+          level: 100, 
+          color: '#FFD700', 
+          icon: <FaPlusCircle />, 
+          isSpecial: true 
+      }
   ];
 
   // Duplicate list to create seamless loop
@@ -55,19 +62,18 @@ const Skills = () => {
                     backgroundColor: `${skill.color}20`, 
                     color: skill.color, 
                     border: `1px solid ${skill.color}`,
-                    width: '50px',
-                    height: '50px',
-                    fontSize: '1.2rem',
+                    width: '60px',
+                    height: '60px',
+                    fontSize: '2rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}
               >
-                {skill.isSpecial ? <FaPlusCircle /> : skill.name.substring(0, 2)}
+                {skill.icon || skill.name.substring(0, 2)}
               </div>
               <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem', textAlign: 'center' }}>{skill.name}</h3>
               
-              {/* Simple progress bar for compact view (hide for special item) */}
               {!skill.isSpecial && (
                 <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '5px' }}>
                     <div style={{ width: `${skill.level}%`, height: '100%', background: skill.color, borderRadius: '2px' }}></div>
@@ -136,10 +142,11 @@ const Skills = () => {
                                 border: `1px solid ${skill.color}`,
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'center'
+                                justifyContent: 'center',
+                                fontSize: '2rem'
                             }}
                             >
-                             {skill.isSpecial ? <FaPlusCircle /> : skill.name.substring(0, 2)}
+                             {skill.icon || skill.name.substring(0, 2)}
                             </div>
                             <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', textAlign: 'center' }}>{skill.name}</h3>
                             {!skill.isSpecial && (
