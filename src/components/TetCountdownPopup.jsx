@@ -54,7 +54,7 @@ const TetCountdownPopup = () => {
                 bạn đã sắm sửa được gì chưa?
             </p>
 
-            <div style={styles.ctaContainer}>
+            {/* <div style={styles.ctaContainer}>
                 <Link to="/nuoi-hieu" onClick={() => setIsVisible(false)} style={{ textDecoration: 'none' }}>
                   <motion.div 
                     style={styles.link}
@@ -66,7 +66,7 @@ const TetCountdownPopup = () => {
                       🧧 Lì xì
                   </motion.div>
                 </Link>
-            </div>
+            </div> */}
 
             <div style={styles.decor}>
               🧧 ✨ 🏮 ✨ 🧧
