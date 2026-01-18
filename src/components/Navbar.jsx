@@ -201,7 +201,7 @@ const Navbar = () => {
                 padding: 0,
                 flexDirection: 'row'
             }}>
-                {['home', 'skills', 'experience', 'awards', 'projects'].map((item) => (
+                {['home', 'skills', 'experience', 'awards', 'projects', 'contact'].map((item) => (
                     <li key={item}>
                         <button 
                             onClick={() => scrollToSection(item)}
