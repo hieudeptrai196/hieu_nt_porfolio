@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '../App';
 import confetti from 'canvas-confetti';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const { t, lang, setLang } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +20,11 @@ const Navbar = () => {
   }, []);
 
   const handleLogoClick = () => {
-    scrollToSection('home');
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      scrollToSection('home');
+    }
     setIsOpen(false);
     var duration = 3 * 1000;
     var animationEnd = Date.now() + duration;
