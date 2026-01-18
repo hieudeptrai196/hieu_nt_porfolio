@@ -11,6 +11,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Cat from './components/Cat';
 import Welcome from './components/Welcome';
 import FloatingContact from './components/FloatingContact';
+import Protect from './components/Protect';
 
 // Create Language Context
 const LanguageContext = createContext();
@@ -37,6 +38,7 @@ function App() {
     <LanguageContext.Provider value={{ lang, setLang, t }}>
       <BrowserRouter>
         <main>
+            <Protect />
             <Navbar />
             <ScrollToTop />
             <FloatingContact />
