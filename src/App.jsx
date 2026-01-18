@@ -19,6 +19,7 @@ import WeatherNotification from './components/WeatherNotification';
 import TranslateWidget from './components/TranslateWidget';
 import CalculatorWidget from './components/CalculatorWidget';
 import MusicWidget from './components/MusicWidget';
+import NuoiHieu from './components/NuoiHieu';
 
 // Create Language Context
 const LanguageContext = createContext();
@@ -38,29 +39,44 @@ const Home = () => {
     );
 };
 
+import { useLocation } from 'react-router-dom';
+
+function AppContent() {
+  const { lang, t, setLang } = useLanguage();
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
+  return (
+    <>
+      <Protect />
+      <ScrollToTop />
+      <Navbar />
+      <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/nuoi-hieu" element={<NuoiHieu />} />
+      </Routes>
+      
+      {isHome && <WeatherNotification />}
+      <FloatingContact />
+      <Cat isPlaying={isMusicPlaying} />
+      {/* <TranslateWidget />
+      <CalculatorWidget /> */}
+      <MusicWidget onPlayStateChange={setIsMusicPlaying} />
+      <Footer />
+    </>
+  );
+}
+
 function App() {
   const [lang, setLang] = useState('vi'); 
-  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const t = content[lang];
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
       <BrowserRouter>
-        <Protect />
-        <ScrollToTop />
-        <Navbar />
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/welcome" element={<Welcome />} />
-        </Routes>
-        
-        <WeatherNotification />
-        <FloatingContact />
-        <Cat isPlaying={isMusicPlaying} />
-        {/* <TranslateWidget />
-        <CalculatorWidget /> */}
-        <MusicWidget onPlayStateChange={setIsMusicPlaying} />
-        <Footer />
+        <AppContent />
       </BrowserRouter>
     </LanguageContext.Provider>
   );

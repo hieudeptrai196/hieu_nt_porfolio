@@ -536,3 +536,9 @@ h1, h2, h3 {
     font-size: 1.2rem !important;
   }
 }
+
+.package-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}

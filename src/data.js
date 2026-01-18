@@ -11,7 +11,8 @@ export const content = {
       experience: "Kinh nghiệm",
       projects: "Dự án",
       awards: "Giải thưởng",
-      contact: "Liên hệ"
+      contact: "Liên hệ",
+      nuoiHieu: "Nuôi Hiếu"
     },
     skills: {
       title: "Kỹ Năng Chuyên Môn",
@@ -157,7 +158,8 @@ export const content = {
       experience: "Experience",
       projects: "Projects",
       awards: "Awards",
-      contact: "Contact"
+      contact: "Contact",
+      nuoiHieu: "Nuôi Hiếu"
     },
     skills: {
       title: "Technological Arsenal",
