@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Cat from './components/Cat';
 import Welcome from './components/Welcome';
+import LoginScreen from './components/LoginScreen'; // Import here
 
 import Protect from './components/Protect';
 import WeatherNotification from './components/WeatherNotification';
@@ -66,6 +67,25 @@ function AppContent() {
 }
 
 function App() {
+  // Check Private Mode from Env
+  const isPrivateMode = import.meta.env.VITE_PRIVATE_MODE === 'true';
+
+  // Lazy initialization for state
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (!isPrivateMode) return true; // If not private, always auth
+    return sessionStorage.getItem('isHieuAuthenticated') === 'true';
+  });
+
+  const handleLoginSuccess = () => {
+      sessionStorage.setItem('isHieuAuthenticated', 'true');
+      setIsAuthenticated(true);
+  };
+
+  // If Private Mode is ON and Not Authenticated -> Show Login Screen
+  if (isPrivateMode && !isAuthenticated) {
+      return <LoginScreen onLogin={handleLoginSuccess} />;
+  }
+
   return (
     <LanguageProvider>
       <BrowserRouter>
