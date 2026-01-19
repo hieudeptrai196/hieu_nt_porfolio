@@ -3,47 +3,14 @@ import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaSearch, FaChevronLeft, FaChevronRight, FaGlobeAmericas } from 'react-icons/fa';
 import { useLanguage } from '../contexts/LanguageContext';
-
-// MOCK DATA for demonstration when API limits are hit or no key is provided
-const MOCK_DATA = [
-    {
-        title: "React - The library for web and native user interfaces",
-        link: "https://react.dev/",
-        displayLink: "react.dev",
-        snippet: "The library for web and native user interfaces. React lets you build user interfaces out of individual pieces called components. Create your own React components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps."
-    },
-    {
-        title: "Vite | Next Generation Frontend Tooling",
-        link: "https://vitejs.dev/",
-        displayLink: "vitejs.dev",
-        snippet: "Vite is a build tool that aims to provide a faster and leaner development experience for modern web projects. It consists of two major parts: a dev server that provides rich feature enhancements over native ES modules..."
-    },
-    {
-        title: "Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.",
-        link: "https://tailwindcss.com/",
-        displayLink: "tailwindcss.com",
-        snippet: "Tailwind CSS is a utility-first CSS framework for rapidly building custom user interfaces. Functionally, it is a set of classes that map to specific CSS properties."
-    },
-    {
-        title: "Framer Motion",
-        link: "https://www.framer.com/motion/",
-        displayLink: "www.framer.com",
-        snippet: "A production-ready motion library for React. Utilize the power of Framer Motion to create complex animations with ease."
-    },
-    {
-        title: "VNPT - Tập đoàn Bưu chính Viễn thông Việt Nam",
-        link: "https://vnpt.com.vn/",
-        displayLink: "vnpt.com.vn",
-        snippet: "VNPT là tập đoàn bưu chính viễn thông hàng đầu tại Việt Nam, cung cấp các dịch vụ viễn thông, công nghệ thông tin và truyền thông đa phương tiện."
-    }
-];
+import './Search.css';
 
 const SkeletonCard = () => (
     <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        style={styles.resultCard}
+        className="search-result-card"
     >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
             <motion.div 
@@ -154,34 +121,34 @@ const Search = () => {
     };
 
     return (
-        <section style={styles.container}>
-            <div style={styles.backgroundAnimation}></div>
+        <section className="search-page">
+            <div className="search-bg-animation"></div>
             
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                style={styles.contentWrapper}
+                className="search-content-wrapper"
             >
-                <h1 style={styles.title}>{t.search.title}</h1>
+                <h1 className="search-title">{t.search.title}</h1>
 
-                <div style={styles.searchBox}>
-                    <FaSearch style={styles.searchIcon} />
+                <div className="search-box-container">
+                    <FaSearch className="search-box-icon" />
                     <input 
                         type="text" 
                         placeholder={t.search.placeholder} 
-                        style={styles.input}
+                        className="search-box-input"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
-                    <button onClick={() => handleSearch(1)} style={styles.button}>
+                    <button onClick={() => handleSearch(1)} className="search-box-btn">
                         {t.search.button}
                     </button>
                 </div>
 
-                {error && <div style={styles.error}>{error}</div>}
+                {error && <div className="search-error">{error}</div>}
 
-                <div style={styles.resultsContainer}>
+                <div className="search-results-container">
                     <AnimatePresence mode='wait'>
                         {loading ? (
                            <motion.div
@@ -204,17 +171,17 @@ const Search = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -20 }}
                                         transition={{ delay: index * 0.05 }}
-                                        style={styles.resultCard}
+                                        className="search-result-card"
                                         whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.1)' }}
                                     >
-                                        <div style={styles.cardHeader}>
-                                            <FaGlobeAmericas style={styles.globeIcon} />
-                                            <span style={styles.siteName}>{item.displayLink}</span>
+                                        <div className="search-result-header">
+                                            <FaGlobeAmericas className="search-globe-icon" />
+                                            <span className="search-site-name">{item.displayLink}</span>
                                         </div>
-                                        <a href={item.link} target="_blank" rel="noopener noreferrer" style={styles.linkTitle}>
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="search-link-title">
                                             {item.title}
                                         </a>
-                                        <p style={styles.snippet}>{item.snippet}</p>
+                                        <p className="search-snippet">{item.snippet}</p>
                                     </motion.div>
                                 ))}
                             </>
@@ -222,23 +189,24 @@ const Search = () => {
                     </AnimatePresence>
 
                     {searched && results.length === 0 && !loading && (
-                        <p style={styles.noResults}>{t.search.noResults}</p>
+                        <p className="search-no-results">{t.search.noResults}</p>
                     )}
                 </div>
 
                 {results.length > 0 && (
-                    <div style={styles.pagination}>
+                    <div className="search-pagination">
                         <button 
                             disabled={page === 1} 
                             onClick={() => handleSearch(page - 1)}
-                            style={{...styles.pageBtn, opacity: page === 1 ? 0.5 : 1}}
+                            className="search-page-btn"
+                            style={{ opacity: page === 1 ? 0.5 : 1 }}
                         >
                             <FaChevronLeft /> {t.search.prev}
                         </button>
-                        <span style={styles.pageNumber}>Page {page}</span>
+                        <span className="search-page-number">Page {page}</span>
                         <button 
                             onClick={() => handleSearch(page + 1)}
-                            style={styles.pageBtn}
+                            className="search-page-btn"
                         >
                             {t.search.next} <FaChevronRight />
                         </button>
@@ -247,169 +215,6 @@ const Search = () => {
             </motion.div>
         </section>
     );
-};
-
-const styles = {
-    container: {
-        minHeight: '100vh',
-        padding: '100px 20px 40px',
-        color: '#fff',
-        position: 'relative',
-        overflow: 'hidden'
-    },
-    backgroundAnimation: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1,
-        // Assuming global CSS has gradient-bg or used similar to home
-    },
-    contentWrapper: {
-        maxWidth: '800px',
-        margin: '0 auto',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
-    title: {
-        fontSize: '3rem',
-        fontWeight: 'bold',
-        marginBottom: '10px',
-        textAlign: 'center',
-        background: 'linear-gradient(90deg, #ff00cc, #333399)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-    },
-    subtitle: {
-        fontSize: '1.2rem',
-        color: '#ccc',
-        marginBottom: '40px',
-        textAlign: 'center'
-    },
-    searchBox: {
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(10px)',
-        borderRadius: '50px',
-        padding: '10px 20px',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
-    },
-    searchIcon: {
-        color: '#aaa',
-        fontSize: '1.2rem',
-        marginRight: '10px'
-    },
-    input: {
-        flex: 1,
-        background: 'transparent',
-        border: 'none',
-        color: '#fff',
-        fontSize: '1.1rem',
-        outline: 'none',
-        padding: '10px'
-    },
-    button: {
-        background: 'linear-gradient(90deg, #ff00cc, #333399)',
-        border: 'none',
-        color: '#fff',
-        padding: '10px 25px',
-        borderRadius: '30px',
-        fontSize: '1rem',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        transition: 'transform 0.2s',
-    },
-    loading: {
-        marginTop: '20px',
-        fontSize: '1.1rem',
-        color: '#aaa',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px'
-    },
-    error: {
-        marginTop: '20px',
-        color: '#ff4d4d',
-        backgroundColor: 'rgba(255, 77, 77, 0.1)',
-        padding: '10px 20px',
-        borderRadius: '10px'
-    },
-    resultsContainer: {
-        width: '100%',
-        marginTop: '40px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px'
-    },
-    resultCard: {
-        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-        padding: '20px',
-        borderRadius: '15px',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        cursor: 'pointer',
-        transition: 'background-color 0.3s'
-    },
-    cardHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        marginBottom: '5px',
-        fontSize: '0.9rem',
-        color: '#aaa'
-    },
-    globeIcon: {
-        fontSize: '0.8rem'
-    },
-    siteName: {
-        fontWeight: '500'
-    },
-    linkTitle: {
-        fontSize: '1.3rem',
-        color: '#4dabf7',
-        textDecoration: 'none',
-        fontWeight: 'bold',
-        display: 'block',
-        marginBottom: '10px'
-    },
-    snippet: {
-        fontSize: '1rem',
-        color: '#ddd',
-        lineHeight: '1.5'
-    },
-    noResults: {
-        textAlign: 'center',
-        color: '#aaa',
-        marginTop: '20px'
-    },
-    pagination: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '20px',
-        marginTop: '40px',
-        marginBottom: '40px'
-    },
-    pageBtn: {
-        background: 'rgba(255, 255, 255, 0.1)',
-        border: 'none',
-        color: '#fff',
-        padding: '10px 20px',
-        borderRadius: '10px',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px',
-        fontSize: '1rem'
-    },
-    pageNumber: {
-        fontSize: '1.1rem',
-        fontWeight: 'bold'
-    }
 };
 
 export default Search;

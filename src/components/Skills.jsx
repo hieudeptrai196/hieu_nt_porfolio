@@ -135,7 +135,7 @@ const Skills = () => {
                         maxHeight: '80vh', 
                         overflowY: 'auto',
                         padding: '3rem',
-                        background: '#1a1a2e',
+                        background: 'var(--bg-body)',
                         border: '1px solid var(--glass-border)',
                         borderRadius: '20px'
                     }}

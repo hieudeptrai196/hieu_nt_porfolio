@@ -23,6 +23,7 @@ import TetCountdownPopup from './components/TetCountdownPopup'; // TEMPORARY
 import Search from './components/Search';
 import ChatWidget from './components/ChatWidget';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 const Home = () => {
     return (
@@ -88,9 +89,11 @@ function App() {
 
   return (
     <LanguageProvider>
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+      </ThemeProvider>
     </LanguageProvider>
   );
 }

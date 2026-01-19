@@ -1,0 +1,236 @@
+/* Navbar.css */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 25px 40px;
+    background: transparent;
+    border-bottom: 1px solid transparent; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled, .navbar.menu-open {
+    padding: 15px 40px;
+    background: var(--bg-body); /* Changed from hardcoded rgba to variable, though glass effect is preferred */
+}
+
+/* Glass effect override if variables allow or custom helper */
+@supports (backdrop-filter: blur(15px)) {
+    .navbar.scrolled, .navbar.menu-open {
+        background: rgba(var(--bg-rgb), 0.8); /* Requires RGB vars which we don't have yet, let's stick to glass vars */
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-border);
+    }
+}
+
+.navbar-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.navbar-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.navbar-search-form {
+    display: flex;
+    align-items: center;
+    background: var(--glass-bg);
+    border-radius: 20px;
+    padding: 5px 15px;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s;
+}
+
+.navbar-search-input {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    outline: none;
+    width: 180px;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.navbar-search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.navbar-search-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    padding: 0;
+}
+
+.navbar-lang-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.theme-toggle-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.theme-toggle-btn:hover {
+    background: var(--card-hover);
+    transform: rotate(15deg);
+}
+
+.mobile-toggle {
+    display: none;
+}
+
+.navbar-lang-switch {
+    background: var(--glass-bg);
+    padding: 4px;
+    border-radius: 20px;
+    display: flex;
+    gap: 4px;
+    border: 1px solid var(--glass-border);
+}
+
+.lang-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    padding: 5px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: normal;
+    transition: all 0.3s;
+}
+
+.lang-btn.active.vi {
+    background: var(--primary);
+    color: white; /* Always white for active pill */
+    font-weight: bold;
+}
+
+.lang-btn.active.en {
+    background: var(--secondary);
+    color: white;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+}
+
+.nav-item-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: 500;
+    opacity: 0.9;
+    transition: color 0.3s;
+}
+
+.nav-item-btn:hover {
+    color: var(--primary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px !important;
+    }
+
+    .mobile-toggle {
+        display: block;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg-body);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 150px;
+        gap: 40px !important;
+        transform: translateY(-100%);
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        visibility: hidden;
+        z-index: 999;
+    }
+    
+     /* Glass effect for mobile menu? */
+    @supports (backdrop-filter: blur(20px)) {
+        .nav-links {
+             background: var(--glass-bg);
+             backdrop-filter: blur(20px);
+             -webkit-backdrop-filter: blur(20px);
+        }
+    }
+
+    .nav-links.open {
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .nav-links ul {
+        flex-direction: column !important;
+        gap: 30px !important;
+        width: 100%;
+        align-items: center;
+    }
+
+    .nav-links button {
+        font-size: 2rem !important;
+        font-weight: 800 !important;
+        color: var(--text-main) !important; /* Update variable */
+        letter-spacing: 1px;
+        text-transform: uppercase !important;
+    }
+
+    .navbar-lang-container {
+        margin-right: 50px; /* Make space for hamburger */
+    }
+}

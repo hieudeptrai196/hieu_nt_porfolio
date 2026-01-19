@@ -79,7 +79,7 @@ const NuoiHieu = () => {
   const t = content[lang];
 
   return (
-    <div style={{ paddingTop: '100px', minHeight: '100vh', background: 'var(--bg)', color: 'white' }}>
+    <div style={{ paddingTop: '100px', minHeight: '100vh', background: 'var(--bg-body)', color: 'var(--text-main)' }}>
       <section style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px' }}>
         
         {/* Hero Section */}
@@ -90,7 +90,7 @@ const NuoiHieu = () => {
           style={{ padding: '60px 40px', borderRadius: '30px', textAlign: 'center', marginBottom: '40px' }}
         >
           <h1 className="gradient-text" style={{ fontSize: '3rem', marginBottom: '20px' }}>{t.title}</h1>
-          <p style={{ fontSize: '1.2rem', color: '#ccc', lineHeight: '1.8', maxWidth: '800px', margin: '0 auto' }}>
+          <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', lineHeight: '1.8', maxWidth: '800px', margin: '0 auto' }}>
             {t.desc}
           </p>
         </motion.div>
@@ -107,9 +107,9 @@ const NuoiHieu = () => {
                 <h2 style={{ fontSize: '2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '15px' }}>
                     <FaHeart color="#ef4444" /> {t.donationTitle}
                 </h2>
-                <p style={{ color: '#aaa', marginBottom: '30px' }}>{t.donationSubtitle}</p>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '30px' }}>{t.donationSubtitle}</p>
                 
-                <div style={{ background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '15px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ background: 'var(--glass-bg)', padding: '20px', borderRadius: '15px', border: '1px solid var(--glass-border)' }}>
                     <p style={{ margin: '5px 0', fontSize: '1.1rem' }}><strong>Bank:</strong> TECHCOMBANK</p>
                     <p style={{ margin: '5px 0', fontSize: '1.1rem' }}><strong>Account:</strong> 1903 7937 0140 17</p>
                     <p style={{ margin: '5px 0', fontSize: '1.1rem' }}><strong>Name:</strong> NGUYEN THO HIEU</p>
@@ -131,13 +131,13 @@ const NuoiHieu = () => {
                       style={{ width: '100%', height: 'auto', display: 'block' }}
                     />
                 </div>
-                <p style={{ marginTop: '15px', color: '#888', fontSize: '0.9rem' }}>Quét mã để chuyển khoản nhanh</p>
+                <p style={{ marginTop: '15px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Quét mã để chuyển khoản nhanh</p>
             </motion.div>
         </div>
 
         {/* Packages */}
         <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '10px' }}>{t.packagesTitle}</h2>
-        <p style={{ textAlign: 'center', color: '#888', marginBottom: '40px' }}>{t.packagesSubtitle}</p>
+        <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '40px' }}>{t.packagesSubtitle}</p>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '25px', marginBottom: '60px' }}>
             {t.packages.map((pkg, index) => (
@@ -154,7 +154,7 @@ const NuoiHieu = () => {
                         {pkg.icon}
                     </div>
                     <h3 style={{ fontSize: '1.4rem', marginBottom: '10px' }}>{pkg.name}</h3>
-                    <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: '20px', height: '40px' }}>{pkg.desc}</p>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '20px', height: '40px' }}>{pkg.desc}</p>
                     <div className="gradient-text" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{pkg.price}</div>
                 </motion.div>
             ))}
@@ -169,7 +169,7 @@ const NuoiHieu = () => {
           style={{ padding: '40px', borderRadius: '25px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(244, 114, 182, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)' }}
         >
           <h2 style={{ fontSize: '2rem', marginBottom: '15px' }}>{t.thankYou}</h2>
-          <p style={{ color: '#ccc', maxWidth: '700px', margin: '0 auto', lineHeight: '1.6' }}>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '700px', margin: '0 auto', lineHeight: '1.6' }}>
             {t.thankYouDesc}
           </p>
         </motion.div>

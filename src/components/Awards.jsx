@@ -42,9 +42,9 @@ const Awards = () => {
             
             <div>
                 <span style={{ color: '#FFD700', fontWeight: 'bold', display: 'block', marginBottom: '4px' }}>{award.date}</span>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'white' }}>{award.title}</h3>
-                <h4 style={{ color: '#ccc', marginBottom: '0.5rem' }}>{award.issuer}</h4>
-                <p style={{ color: '#aaa', fontSize: '0.9rem' }}>{award.desc}</p>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--text-main)' }}>{award.title}</h3>
+                <h4 style={{ color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{award.issuer}</h4>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{award.desc}</p>
             </div>
           </motion.div>
         ))}

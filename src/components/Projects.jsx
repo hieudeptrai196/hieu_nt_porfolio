@@ -23,7 +23,7 @@ const Projects = () => {
               style={{ 
                 fontSize: '2rem', 
                 marginBottom: '2rem', 
-                color: 'white', 
+                color: 'var(--text-main)', 
                 borderLeft: '4px solid var(--primary)', 
                 paddingLeft: '1rem' 
               }}
@@ -42,7 +42,7 @@ const Projects = () => {
                 >
                   <div style={{ flex: 1 }}>
                     <h3 className="project-title">{project.title}</h3>
-                    <p style={{ color: '#aaa', lineHeight: '1.6', marginBottom: '1rem' }}>{project.desc}</p>
+                    <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '1rem' }}>{project.desc}</p>
                   </div>
                   
                   <div className="project-tech">

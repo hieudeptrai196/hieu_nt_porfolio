@@ -66,20 +66,20 @@ const Contact = () => {
             style={{ padding: '30px' }}
         >
             <h3 className="gradient-text" style={{ fontSize: '1.8rem', marginBottom: '20px' }}>{content.subtitle}</h3>
-            <p style={{ color: '#ccc', marginBottom: '30px', lineHeight: '1.6' }}>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '30px', lineHeight: '1.6' }}>
                 {content.desc}
             </p>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', color: 'white' }}>
-                    <div className="icon-box" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', color: 'var(--text-main)' }}>
+                    <div className="icon-box" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
                         <FaEnvelope />
                     </div>
                     <span>hieulatoi1962@gmail.com</span>
                 </div>
 
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px', color: 'white' }}>
-                    <div className="icon-box" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px', color: 'var(--text-main)' }}>
+                    <div className="icon-box" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
                         <FaMapMarkerAlt />
                     </div>
                     <span>{content.address}</span>
@@ -97,11 +97,11 @@ const Contact = () => {
         >
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                    <input name="name" onChange={handleChange} required type="text" placeholder={content.name} className="glass-input" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'white', outline: 'none' }} />
-                    <input name="email" onChange={handleChange} required type="email" placeholder={content.email} className="glass-input" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'white', outline: 'none' }} />
+                    <input name="name" onChange={handleChange} required type="text" placeholder={content.name} className="glass-input" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--text-main)', outline: 'none' }} />
+                    <input name="email" onChange={handleChange} required type="email" placeholder={content.email} className="glass-input" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--text-main)', outline: 'none' }} />
                 </div>
-                <input name="subject" onChange={handleChange} required type="text" placeholder={content.subject} className="glass-input" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'white', outline: 'none' }} />
-                <textarea name="message" onChange={handleChange} required placeholder={content.message} rows="5" className="glass-input" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'white', outline: 'none', resize: 'none' }}></textarea>
+                <input name="subject" onChange={handleChange} required type="text" placeholder={content.subject} className="glass-input" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--text-main)', outline: 'none' }} />
+                <textarea name="message" onChange={handleChange} required placeholder={content.message} rows="5" className="glass-input" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--text-main)', outline: 'none', resize: 'none' }}></textarea>
                 
                 <button type="submit" className="glow-btn" style={{ alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     {content.send} <FaPaperPlane />

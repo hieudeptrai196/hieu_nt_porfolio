@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaRobot, FaPaperPlane, FaTimes, FaMinus, FaCommentDots } from 'react-icons/fa';
+import { FaRobot, FaPaperPlane, FaTimes, FaMinus } from 'react-icons/fa';
 import ReactMarkdown from 'react-markdown';
 import { useLanguage } from '../contexts/LanguageContext';
 import { content } from '../data';
+import './ChatWidget.css';
 
 // Direct API Call to bypass library version issues
 const ChatWidget = () => {
@@ -131,10 +132,10 @@ const ChatWidget = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setIsOpen(true)}
-                    style={styles.fab}
+                    className="chat-fab-btn"
                 >
                     <FaRobot size={24} />
-                    <span style={styles.fabTooltip}>
+                    <span className="chat-fab-tooltip">
                         {lang === 'vi' ? 'Trò chuyện cùng Hiếu AI' : 'Chat with Hieu AI'}
                     </span>
                 </motion.button>
@@ -147,49 +148,42 @@ const ChatWidget = () => {
                         initial={{ opacity: 0, y: 100, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 100, scale: 0.9 }}
-                        style={styles.chatWindow}
+                        className="chat-window-container"
                     >
                         {/* Header */}
-                        <div style={styles.header}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <div style={styles.avatar}>
+                        <div className="chat-header">
+                            <div className="chat-header-info">
+                                <div className="chat-avatar">
                                     <FaRobot size={18} color="#fff" />
                                 </div>
-                                <div>
-                                    <h3 style={{ margin: 0, fontSize: '1rem', color: '#fff' }}>Hieu Nguyen</h3>
-                                    <span style={{ fontSize: '0.7rem', color: '#00ff88' }}>
+                                <div className="chat-title">
+                                    <h3>Hieu Nguyen</h3>
+                                    <span className="chat-title-status">
                                         {lang === 'vi' ? 'Miễn phí (Beta)' : 'Free Tier (Beta)'}
                                     </span>
                                 </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '10px' }}>
+                            <div className="chat-controls">
                                 <FaMinus 
-                                    style={{ cursor: 'pointer', color: '#ccc' }} 
+                                    className="chat-minimize-btn"
                                     onClick={() => setIsOpen(false)} 
                                 />
                             </div>
                         </div>
 
                         {/* Messages Body */}
-                        <div style={styles.body}>
+                        <div className="chat-body">
                             {messages.map((msg) => (
                                 <div 
                                     key={msg.id} 
-                                    style={{ 
-                                        ...styles.messageRow, 
-                                        justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' 
-                                    }}
+                                    className={`chat-message-row ${msg.role === 'user' ? 'user' : 'model'}`}
                                 >
                                     {msg.role === 'model' && (
-                                        <div style={styles.msgAvatar}>
+                                        <div className="chat-msg-avatar">
                                             <FaRobot size={12} color="#fff" />
                                         </div>
                                     )}
-                                    <div style={{
-                                        ...styles.bubble,
-                                        background: msg.role === 'user' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : 'rgba(255, 255, 255, 0.1)',
-                                        borderRadius: msg.role === 'user' ? '15px 15px 0 15px' : '15px 15px 15px 0'
-                                    }}>
+                                    <div className={`chat-bubble ${msg.role === 'user' ? 'user' : 'model'}`}>
                                         <ReactMarkdown 
                                             components={{
                                                 p: (props) => <p style={{margin: 0}} {...props} />
@@ -201,10 +195,10 @@ const ChatWidget = () => {
                                 </div>
                             ))}
                             {isLoading && (
-                                <div style={styles.messageRow}>
-                                    <div style={styles.msgAvatar}><FaRobot size={12} /></div>
-                                    <div style={{ ...styles.bubble, background: 'rgba(255, 255, 255, 0.1)' }}>
-                                        <div className="typing-dot" style={{ display: 'flex', gap: '4px' }}>
+                                <div className="chat-message-row model">
+                                    <div className="chat-msg-avatar"><FaRobot size={12} /></div>
+                                    <div className="chat-bubble model">
+                                        <div className="typing-dot-container">
                                             <motion.span animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1 }}>•</motion.span>
                                             <motion.span animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }}>•</motion.span>
                                             <motion.span animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }}>•</motion.span>
@@ -216,16 +210,16 @@ const ChatWidget = () => {
                         </div>
 
                         {/* Input Area */}
-                        <div style={styles.footer}>
+                        <div className="chat-footer">
                             <textarea
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={handleKeyDown}
                                 placeholder={lang === 'vi' ? "Hỏi gì đó đi..." : "Ask something..."}
-                                style={styles.input}
+                                className="chat-input"
                                 rows={1}
                             />
-                            <button onClick={handleSend} disabled={!input.trim() || isLoading} style={styles.sendBtn}>
+                            <button onClick={handleSend} disabled={!input.trim() || isLoading} className="chat-send-btn">
                                 <FaPaperPlane color="#fff" />
                             </button>
                         </div>
@@ -234,129 +228,6 @@ const ChatWidget = () => {
             </AnimatePresence>
         </>
     );
-};
-
-const styles = {
-    fab: {
-        position: 'fixed',
-        bottom: '100px', // 30px (ScrollBtn) + 50px (Size) + 20px (Gap) = 100px
-        right: '30px',   // Aligned perfectly with ScrollToTop
-        width: '50px',
-        height: '50px',
-        borderRadius: '50%',
-        background: 'linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)',
-        color: '#fff',
-        border: 'none',
-        boxShadow: '0 4px 15px rgba(0, 114, 255, 0.5)',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 9999,
-        transition: 'all 0.3s'
-    },
-    chatWindow: {
-        position: 'fixed',
-        bottom: '160px', // 100px (FAB) + 50px (Size) + 10px (Gap)
-        right: '30px',   // Aligned perfectly
-        width: '320px',
-        height: '450px',
-        background: 'rgba(20, 20, 35, 0.95)',
-        backdropFilter: 'blur(15px)',
-        borderRadius: '20px',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
-        display: 'flex',
-        flexDirection: 'column',
-        zIndex: 9999,
-        overflow: 'hidden'
-    },
-    header: {
-        padding: '10px 15px',
-        background: 'rgba(255, 255, 255, 0.05)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
-    avatar: {
-        width: '32px',
-        height: '32px',
-        borderRadius: '50%',
-        background: 'linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    body: {
-        flex: 1,
-        padding: '15px',
-        overflowY: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '15px'
-    },
-    messageRow: {
-        display: 'flex',
-        gap: '8px',
-        alignItems: 'flex-end'
-    },
-    msgAvatar: {
-        width: '24px',
-        height: '24px',
-        borderRadius: '50%',
-        background: '#333',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '5px'
-    },
-    bubble: {
-        padding: '8px 12px',
-        maxWidth: '85%',
-        color: '#fff',
-        fontSize: '0.85rem',
-        lineHeight: '1.4',
-        boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-    },
-    footer: {
-        padding: '10px',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-        display: 'flex',
-        gap: '10px',
-        alignItems: 'center'
-    },
-    input: {
-        flex: 1,
-        background: 'rgba(255, 255, 255, 0.05)',
-        border: 'none',
-        borderRadius: '15px',
-        padding: '8px 12px',
-        color: '#fff',
-        outline: 'none',
-        fontSize: '0.85rem',
-        resize: 'none'
-    },
-    sendBtn: {
-        background: 'transparent',
-        border: 'none',
-        cursor: 'pointer',
-        padding: '5px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    fabTooltip: {
-        position: 'absolute',
-        right: '65px', // Adjusted again
-        background: '#333',
-        color: '#fff',
-        padding: '5px 8px',
-        borderRadius: '4px',
-        fontSize: '0.75rem',
-        whiteSpace: 'nowrap',
-        pointerEvents: 'none'
-    }
 };
 
 export default ChatWidget;

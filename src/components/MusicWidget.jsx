@@ -2,33 +2,22 @@ import { useState, useEffect, useRef } from 'react';
 import { FaMusic, FaTimes, FaPlay, FaYoutube } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
+import './MusicWidget.css';
 
 // Move helper components outside to avoid "created during render" error
 const WaveRipple = () => (
-    <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', overflow: 'visible' }}>
+    <div className="wave-ripple-container">
         <motion.div
             initial={{ scale: 0.9, opacity: 0.4 }}
             animate={{ scale: 1.3, opacity: 0 }}
             transition={{ repeat: Infinity, duration: 2.5, ease: [0.4, 0, 0.2, 1] }}
-            style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                borderRadius: '50%',
-                border: '1px solid rgba(244, 114, 182, 0.4)'
-            }}
+            className="wave-ripple-circle wave-ripple-circle-1"
         />
         <motion.div
             initial={{ scale: 0.9, opacity: 0.3 }}
             animate={{ scale: 1.6, opacity: 0 }}
             transition={{ repeat: Infinity, duration: 2.5, ease: [0.4, 0, 0.2, 1], delay: 1.25 }}
-            style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                borderRadius: '50%',
-                border: '1px solid rgba(244, 114, 182, 0.3)'
-            }}
+            className="wave-ripple-circle wave-ripple-circle-2"
         />
     </div>
 );
@@ -134,32 +123,10 @@ const MusicWidget = ({ onPlayStateChange }) => {
 
   return (
     <>
-      <div style={{ position: 'fixed', left: '20px', top: '100px', zIndex: 45 }}>
+      <div className="music-widget-container">
           {/* Tooltip on Hover if Playing */}
           {videoSrc && (
-              <div 
-                  style={{
-                      position: 'absolute',
-                      left: '60px',
-                      top: '10px',
-                      background: 'rgba(0,0,0,0.85)',
-                      padding: '8px 12px',
-                      borderRadius: '8px',
-                      color: '#fff',
-                      fontSize: '0.8rem',
-                      whiteSpace: 'nowrap',
-                      pointerEvents: 'none',
-                      opacity: isHovered ? 1 : 0,
-                      transform: isHovered ? 'translateX(0)' : 'translateX(-10px)',
-                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                      backdropFilter: 'blur(4px)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      maxWidth: '250px',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
-                  }}
-              >
+              <div className={`music-tooltip ${isHovered ? 'visible' : ''}`}>
                   {videoTitle || "Playing Music 🎵"}
               </div>
           )}
@@ -171,147 +138,65 @@ const MusicWidget = ({ onPlayStateChange }) => {
             onClick={() => setIsOpen(true)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="glass-card"
-            style={{
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                border: videoSrc ? '1px solid #F472B6' : '1px solid rgba(255, 255, 255, 0.1)',
-                background: videoSrc ? 'rgba(244, 114, 182, 0.1)' : 'rgba(15, 23, 42, 0.6)',
-                backdropFilter: 'blur(10px)',
-                color: '#F472B6',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                position: 'relative',
-                boxShadow: videoSrc ? '0 0 20px rgba(244, 114, 182, 0.4)' : '0 4px 15px rgba(0,0,0,0.3)',
-                overflow: 'visible'
-            }}
+            className={`music-trigger-btn glass-card ${videoSrc ? 'active' : 'inactive'}`}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
         >
             {videoSrc && <WaveRipple />}
-            <FaMusic size={20} style={{ position: 'relative', zIndex: 1 }} />
+            <FaMusic size={20} className="music-icon" />
         </motion.button>
       </div>
 
       {/* Modal Container */}
-      <div style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 2000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: isOpen ? 'rgba(0,0,0,0.6)' : 'transparent',
-          backdropFilter: isOpen ? 'blur(5px)' : 'none',
-          pointerEvents: isOpen ? 'auto' : 'none',
-          opacity: isOpen ? 1 : 0,
-          transition: 'all 0.3s ease',
-          visibility: isOpen ? 'visible' : 'hidden'
-      }}>
-          <div style={{ position: 'absolute', inset: 0 }} onClick={() => setIsOpen(false)} />
+      <div className={`music-modal-overlay ${isOpen ? 'open' : ''}`}>
+          <div className="music-modal-backdrop" onClick={() => setIsOpen(false)} />
 
-          <div
-              className="glass-card"
-              style={{
-                  padding: '30px',
-                  borderRadius: '20px',
-                  background: 'rgba(20, 20, 35, 0.9)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                  position: 'relative',
-                  width: '90%',
-                  maxWidth: '450px',
-                  transform: isOpen ? 'scale(1)' : 'scale(0.8)',
-                  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-              }}
-          >
+          <div className="music-modal-card glass-card">
               <button 
                   onClick={() => setIsOpen(false)}
-                  style={{
-                      position: 'absolute',
-                      top: '20px',
-                      right: '20px',
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#888',
-                      cursor: 'pointer',
-                      fontSize: '1.2rem'
-                  }}
+                  className="music-close-btn"
               >
                   <FaTimes />
               </button>
 
-              <h3 className="gradient-text" style={{ fontSize: '1.5rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <h3 className="gradient-text music-modal-title">
                   <FaYoutube color="#FF0000" /> {content.title}
               </h3>
 
-              <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+              <div className="music-input-group">
                   <input 
                       type="text" 
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
                       placeholder={content.placeholder}
-                      className="glass-input"
-                      style={{ 
-                          width: '100%', 
-                          padding: '12px', 
-                          borderRadius: '10px', 
-                          background: 'rgba(255,255,255,0.1)',
-                          border: '1px solid rgba(255,255,255,0.2)',
-                          color: 'white',
-                          outline: 'none'
-                        }}
+                      className="glass-input music-url-input"
                   />
                   <button 
                       onClick={handlePlay}
-                      className="glow-btn"
-                      style={{ padding: '0 20px' }}
+                      className="glow-btn music-play-btn"
                   >
                       <FaPlay size={14} />
                   </button>
               </div>
 
               {!videoSrc && (
-                  <div style={{ 
-                      background: 'rgba(255,255,255,0.05)', 
-                      padding: '15px', 
-                      borderRadius: '10px', 
-                      fontSize: '0.9rem', 
-                      color: '#aaa',
-                      lineHeight: '1.6'
-                  }}>
-                      <strong style={{ color: 'white', display: 'block', marginBottom: '5px' }}>{content.guideTitle}</strong>
-                      <p style={{ margin: 0 }}>{content.guide1}</p>
-                      <p style={{ margin: 0 }}>{content.guide2}</p>
-                      <p style={{ margin: 0 }}>{content.guide3}</p>
+                  <div className="music-guide">
+                      <strong>{content.guideTitle}</strong>
+                      <p>{content.guide1}</p>
+                      <p>{content.guide2}</p>
+                      <p>{content.guide3}</p>
                   </div>
               )}
 
               {videoSrc && (
-                  <div style={{ 
-                      position: 'relative', 
-                      paddingBottom: '56.25%', 
-                      height: 0, 
-                      borderRadius: '15px', 
-                      overflow: 'hidden',
-                      marginTop: '20px'
-                  }}>
+                  <div className="music-video-wrapper">
                       <iframe 
                           src={videoSrc}
                           title="YouTube video player"
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
-                          style={{
-                              position: 'absolute',
-                              top: 0,
-                              left: 0,
-                              width: '100%',
-                              height: '100%'
-                          }}
+                          className="music-video-iframe"
                       ></iframe>
                   </div>
               )}
