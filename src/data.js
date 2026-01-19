@@ -2,7 +2,7 @@ export const content = {
   vi: {
     hero: {
       greeting: "Xin chào, tôi là",
-      role: "Lập trình viên Backend & Kỹ sư phần mềm",
+      role: "Lập trình viên & Kỹ sư phần mềm",
       cta: "Xem dự án",
       about: "Tôi là một người đam mê sáng tạo và luôn tìm kiếm sự hoàn hảo. Với tư duy cởi mở và tinh thần trách nhiệm cao, tôi luôn nỗ lực không ngừng để mang lại những giá trị tốt nhất. Tôi yêu thích việc giải quyết các vấn đề khó, luôn sẵn sàng học hỏi cái mới và chia sẻ kiến thức với mọi người xung quanh."
     },
@@ -31,23 +31,23 @@ export const content = {
         {
           company: 'VNPT',
           link: 'https://vnpt.com.vn',
-          role: 'Backend Developer',
+          role: 'Developer',
           period: '11/2025 - Hiện tại',
           description: 'Phát triển các hệ thống lớn cho dịch vụ tổng đài viễn thông.'
         },
         {
           company: 'Newwave Solutions',
           link: 'https://newwavesolution.com',
-          role: 'Backend Developer',
+          role: 'Developer',
           period: '07/2022 - 11/2025',
           description: 'Đạt giải thưởng MVP 08/2023 và Dự án của năm 01/2025.'
         },
         {
           company: 'SmartOSC',
           link: 'https://www.smartosc.com',
-          role: 'Backend Developer',
+          role: 'Developer',
           period: '01/2022 - 06/2022',
-          description: 'Bắt đầu sự nghiệp với vai trò Backend Developer.'
+          description: 'Bắt đầu sự nghiệp với vai trò Developer.'
         }
       ]
     },
@@ -86,7 +86,7 @@ export const content = {
               title: 'Hệ thống quản lý biển báo điện tử',
               desc: 'Quản lý hệ thống biển báo, bảng quảng cáo và phát trực tiếp nội dung trên biển quảng cáo.',
               tech: ['NodeJS (NestJS)', 'Angular'],
-              details: "- Thiết kế và phát triển backend sử dụng NestJS để quản lý hàng nghìn thiết bị biển báo từ xa.\n- Xây dựng tính năng phát trực tiếp (Live Streaming) nội dung quảng cáo với độ trễ thấp.\n- Phát triển module lập lịch phát quảng cáo thông minh.\n- Xây dựng giao diện quản trị Admin Dashboard bằng Angular."
+              details: "- Thiết kế và phát triển sử dụng NestJS để quản lý hàng nghìn thiết bị biển báo từ xa.\n- Xây dựng tính năng phát trực tiếp (Live Streaming) nội dung quảng cáo với độ trễ thấp.\n- Phát triển module lập lịch phát quảng cáo thông minh.\n- Xây dựng giao diện quản trị Admin Dashboard bằng Angular."
             }
           ]
         },
@@ -211,7 +211,7 @@ export const content = {
           link: 'https://www.smartosc.com',
           role: 'Backend Developer',
           period: '01/2022 - 06/2022',
-          description: 'Started career as a Backend Developer.'
+          description: 'Started career as a Developer.'
         }
       ]
     },
@@ -250,7 +250,7 @@ export const content = {
               title: 'Digital Signage Management System',
               desc: 'Manages electronic signs, billboards, and live streaming content on billboards.',
               tech: ['NodeJS (NestJS)', 'Angular'],
-              details: "- Designed and developed backend using NestJS to manage thousands of remote signage devices.\n- Built low-latency Live Streaming features for ad content.\n- Developed smart ad scheduling modules.\n- Built Admin Dashboard interface using Angular."
+              details: "- Designed and developed using NestJS to manage thousands of remote signage devices.\n- Built low-latency Live Streaming features for ad content.\n- Developed smart ad scheduling modules.\n- Built Admin Dashboard interface using Angular."
             }
           ]
         },
