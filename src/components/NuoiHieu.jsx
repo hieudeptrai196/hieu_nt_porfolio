@@ -7,33 +7,33 @@ const NuoiHieu = () => {
 
   const content = {
     vi: {
-      title: "Dự Án \"Nuôi Hiếu\"",
+      title: "Dự Án 'Nuôi Hiếu'",
       subtitle: "Chung tay xây dựng ước mơ cùng Hiếu",
       desc: "Chào mừng bạn đến với dự án \"Nuôi Hiếu\" – một sáng kiến nhằm giúp tôi thực hiện những ước mơ: sở hữu một căn biệt thự hoành tráng và một chiếc siêu xe bóng loáng. Mọi sự đóng góp của bạn, dù lớn hay nhỏ, đều là nguồn động viên to lớn để tôi tiếp tục theo đuổi con đường lập trình và sáng tạo.",
       donationTitle: "Thông tin donate",
       donationSubtitle: "Sự ủng hộ của bạn là nguồn động lực to lớn để mình tiếp tục sáng tạo và hoàn thiện những dự án chất lượng hơn.",
-      packagesTitle: "Các Gói \"Nuôi\"",
+      packagesTitle: "Các Gói 'Nuôi'",
       packagesSubtitle: "Chọn một gói để thấy sức ảnh hưởng trực tiếp từ đóng góp của bạn!",
       thankYou: "Lời Cảm Ơn",
       thankYouDesc: "Xin chân thành cảm ơn tấm lòng vàng của bạn. Sự ủng hộ của bạn là minh chứng rằng không có ước mơ nào là quá xa vời khi chúng ta cùng nhau chung sức.",
       packages: [
         {
           id: 1,
-          name: "Gói \"Viên Gạch Xây Móng\"",
+          name: "Gói 'Viên Gạch Xây Móng'",
           price: "50.000 VNĐ",
           desc: "Xây dựng nền tảng vững chắc cho biệt thự tương lai.",
           icon: <FaHome size={30} />
         },
         {
           id: 2,
-          name: "Gói \"Lốp Lăn Bánh\"",
+          name: "Gói 'Lốp Lăn Bánh'",
           price: "100.000 VNĐ",
           desc: "Giúp siêu xe lăn bánh trên con đường chinh phục ước mơ.",
           icon: <FaCar size={30} />
         },
         {
           id: 3,
-          name: "Gói \"Cất Nóc Nhà\"",
+          name: "Gói 'Cất Nóc Nhà'",
           price: "500.000 VNĐ",
           desc: "Cú hích quyết định để hoàn thiện mái ấm trong mơ.",
           icon: <FaGem size={30} />
@@ -41,33 +41,33 @@ const NuoiHieu = () => {
       ]
     },
     en: {
-      title: "Project \"Nuôi Hiếu\"",
+      title: "Project 'Nuôi Hiếu'",
       subtitle: "Build Dreams Together with Hiếu",
       desc: "Welcome to Project \"Nuôi Hiếu\" – an initiative aimed at helping me realize my dreams: owning a grand villa and a sleek supercar. Every contribution, big or small, is a huge motivation for me to continue my coding and creative path.",
       donationTitle: "Donation Information",
       donationSubtitle: "All support is welcomed via the details below. Your name will be honored in our \"Wall of Fame\".",
-      packagesTitle: "\"Support\" Packages",
+      packagesTitle: "'Support' Packages",
       packagesSubtitle: "Choose a package to see the direct impact of your contribution!",
       thankYou: "A Big Thank You",
       thankYouDesc: "Sincerely thank you for your golden heart. Your support proves that no dream is too far when we stand together.",
       packages: [
         {
           id: 1,
-          name: "\"Brick by Brick\" Package",
+          name: "'Brick by Brick' Package",
           price: "50,000 VNĐ",
           desc: "Building a solid foundation for the future villa.",
           icon: <FaHome size={30} />
         },
         {
           id: 2,
-          name: "\"Rolling Wheels\" Package",
+          name: "'Rolling Wheels' Package",
           price: "100,000 VNĐ",
           desc: "Helping the supercar roll towards the dream.",
           icon: <FaCar size={30} />
         },
         {
           id: 3,
-          name: "\"Top the Roof\" Package",
+          name: "'Top the Roof' Package",
           price: "500,000 VNĐ",
           desc: "The final push to complete the dream home.",
           icon: <FaGem size={30} />

@@ -23,7 +23,25 @@ export const content = {
     skills: {
       title: "Kỹ Năng Chuyên Môn",
       viewAll: "Xem tất cả kỹ năng",
-      more: "Và nhiều hơn thế nữa..."
+      more: "Và nhiều hơn thế nữa...",
+      items: [
+        { name: "PHP", level: "90%" },
+        { name: "Laravel", level: "85%" },
+        { name: "MySQL", level: "85%" },
+        { name: "Redis", level: "60%" },
+        { name: "Git", level: "85%" },
+        { name: "Node.js", level: "60%" },
+        { name: "ReactJS", level: "60%" },
+        { name: "VueJS", level: "60%" },
+        { name: "Angular", level: "60%" },
+        { name: "HTML", level: "90%" },
+        { name: "CSS", level: "85%" },
+        { name: "Java", level: "65%" },
+        { name: "Python", level: "60%" },
+        { name: "Docker", level: "55%" },
+        { name: "Vercel", level: "70%" },
+        { name: "GMO API", level: "75%" }
+      ]
     },
     experience: {
       title: "Kinh Nghiệm Làm Việc",
@@ -187,7 +205,25 @@ export const content = {
     skills: {
       title: "Technological Arsenal",
       viewAll: "View All Skills",
-      more: "And much more..."
+      more: "And much more...",
+      items: [
+        { name: "PHP", level: "90%" },
+        { name: "Laravel", level: "85%" },
+        { name: "MySQL", level: "85%" },
+        { name: "Redis", level: "60%" },
+        { name: "Git", level: "85%" },
+        { name: "Node.js", level: "60%" },
+        { name: "ReactJS", level: "60%" },
+        { name: "VueJS", level: "60%" },
+        { name: "Angular", level: "60%" },
+        { name: "HTML", level: "90%" },
+        { name: "CSS", level: "85%" },
+        { name: "Java", level: "65%" },
+        { name: "Python", level: "60%" },
+        { name: "Docker", level: "55%" },
+        { name: "Vercel", level: "70%" },
+        { name: "GMO API", level: "75%" }
+      ]
     },
     experience: {
       title: "Work Experience",
