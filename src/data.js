@@ -175,7 +175,7 @@ export const content = {
     search: {
       title: "Tìm kiếm",
       subtitle: "Sử dụng sức mạnh của Google Search API",
-      placeholder: "Nhập từ khóa tìm kiếm (VD: React, VNPT...)",
+      placeholder: "Nhập từ khóa tìm kiếm",
       button: "Tìm kiếm",
       loading: "Đang tìm kiếm...",
       noResults: "Không tìm thấy kết quả nào.",
@@ -360,7 +360,7 @@ export const content = {
     search: {
       title: "Search",
       subtitle: "Powered by Google Search API",
-      placeholder: "Enter keywords (e.g. React, VNPT...)",
+      placeholder: "Enter keywords",
       button: "Search",
       loading: "Searching...",
       noResults: "No results found.",
