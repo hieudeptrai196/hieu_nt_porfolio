@@ -135,7 +135,7 @@ const ChatWidget = () => {
                 >
                     <FaRobot size={24} />
                     <span style={styles.fabTooltip}>
-                        {lang === 'vi' ? 'Trò chuyện cùng Hiếu' : 'Chat with Hieu'}
+                        {lang === 'vi' ? 'Trò chuyện cùng Hiếu AI' : 'Chat with Hieu AI'}
                     </span>
                 </motion.button>
             )}
