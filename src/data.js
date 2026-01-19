@@ -53,14 +53,14 @@ export const content = {
           company: 'VNPT',
           link: 'https://vnpt.com.vn',
           role: 'Developer',
-          period: '11/2025 - Hiện tại',
+          period: '10/2025 - Hiện tại',
           description: 'Phát triển các hệ thống lớn cho dịch vụ tổng đài viễn thông.'
         },
         {
           company: 'Newwave Solutions',
           link: 'https://newwavesolution.com',
           role: 'Developer',
-          period: '07/2022 - 11/2025',
+          period: '07/2022 - 10/2025',
           description: 'Đạt giải thưởng MVP 08/2023 và Dự án của năm 01/2025.'
         },
         {
@@ -238,14 +238,14 @@ export const content = {
           company: 'VNPT',
           link: 'https://vnpt.com.vn',
           role: 'Backend Developer',
-          period: '11/2025 - Present',
+          period: '10/2025 - Present',
           description: 'Developing major systems for telecommunication switchboard services.'
         },
         {
           company: 'Newwave Solutions',
           link: 'https://newwavesolution.com',
           role: 'Backend Developer',
-          period: '07/2022 - 11/2025',
+          period: '07/2022 - 10/2025',
           description: 'Awarded MVP 08/2023 and Project of the Year 01/2025.'
         },
         {
