@@ -9,7 +9,8 @@ export const content = {
     profile: {
       birthday: "19/06/2000",
       hometown: "Nam Định (nay là Ninh Bình)",
-      education: "Tốt nghiệp Đại học Điện lực chuyên ngành Công nghệ phần mềm"
+      education: "Tốt nghiệp Đại học Điện lực chuyên ngành Công nghệ phần mềm",
+      email: "hieulatoi1962@gmail.com"
     },
     nav: {
       home: "Trang chủ",
@@ -193,7 +194,8 @@ export const content = {
     profile: {
       birthday: "June 19, 2000",
       hometown: "Nam Dinh (now Ninh Binh)",
-      education: "Graduated from Electric Power University - Major: Software Engineering"
+      education: "Graduated from Electric Power University - Major: Software Engineering",
+      email: "hieulatoi1962@gmail.com"
     },
     nav: {
       home: "Home",
