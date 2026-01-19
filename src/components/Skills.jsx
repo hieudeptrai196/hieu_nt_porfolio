@@ -24,8 +24,8 @@ const baseSkillList = [
   { name: 'Docker', level: 55, color: '#2496ED', icon: <FaDocker />, link: 'https://www.docker.com/' },
   { name: 'Vercel', level: 70, color: '#FFFFFF', icon: <SiVercel />, link: 'https://vercel.com/' },
   { name: 'GMO API', level: 75, color: '#005BAA', icon: <span style={{fontWeight:'900', fontFamily:'sans-serif', fontSize: '1.5rem'}}>GMO</span>, link: 'https://www.gmo.jp/' },
-  { name: 'OpenAI API', level: 80, color: '#412991', icon: <SiOpenai />, link: 'https://openai.com/' },
-  { name: 'Gemini API', level: 85, color: '#8E75B2', icon: <SiGoogle />, link: 'https://deepmind.google/technologies/gemini/' },
+  { name: 'OpenAI API', level: 60, color: '#412991', icon: <SiOpenai />, link: 'https://openai.com/' },
+  { name: 'Gemini API', level: 60, color: '#8E75B2', icon: <SiGoogle />, link: 'https://deepmind.google/technologies/gemini/' },
 ];
 
 const Skills = () => {
