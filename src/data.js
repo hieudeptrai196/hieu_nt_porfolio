@@ -40,7 +40,9 @@ export const content = {
         { name: "Python", level: "60%" },
         { name: "Docker", level: "55%" },
         { name: "Vercel", level: "70%" },
-        { name: "GMO API", level: "75%" }
+        { name: "GMO API", level: "75%" },
+        { name: "OpenAI API", level: "60%" },
+        { name: "Gemini API", level: "60%" }
       ]
     },
     experience: {
@@ -222,7 +224,9 @@ export const content = {
         { name: "Python", level: "60%" },
         { name: "Docker", level: "55%" },
         { name: "Vercel", level: "70%" },
-        { name: "GMO API", level: "75%" }
+        { name: "GMO API", level: "75%" },
+        { name: "OpenAI API", level: "60%" },
+        { name: "Gemini API", level: "60%" }
       ]
     },
     experience: {

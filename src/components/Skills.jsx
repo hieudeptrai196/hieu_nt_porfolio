@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { FaTimes, FaPlusCircle, FaPhp, FaLaravel, FaNodeJs, FaReact, FaVuejs, FaPython, FaJava, FaDocker, FaGitAlt, FaAngular } from 'react-icons/fa';
-import { SiMysql, SiRedis, SiPostman, SiVercel } from 'react-icons/si';
+import { SiMysql, SiRedis, SiPostman, SiVercel, SiOpenai, SiGoogle } from 'react-icons/si';
 
 const baseSkillList = [
   // Original High Level Skills
@@ -24,6 +24,8 @@ const baseSkillList = [
   { name: 'Docker', level: 55, color: '#2496ED', icon: <FaDocker />, link: 'https://www.docker.com/' },
   { name: 'Vercel', level: 70, color: '#FFFFFF', icon: <SiVercel />, link: 'https://vercel.com/' },
   { name: 'GMO API', level: 75, color: '#005BAA', icon: <span style={{fontWeight:'900', fontFamily:'sans-serif', fontSize: '1.5rem'}}>GMO</span>, link: 'https://www.gmo.jp/' },
+  { name: 'OpenAI API', level: 80, color: '#412991', icon: <SiOpenai />, link: 'https://openai.com/' },
+  { name: 'Gemini API', level: 85, color: '#8E75B2', icon: <SiGoogle />, link: 'https://deepmind.google/technologies/gemini/' },
 ];
 
 const Skills = () => {
