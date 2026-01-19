@@ -6,6 +6,11 @@ export const content = {
       cta: "Xem dự án",
       about: "Tôi là một người đam mê sáng tạo và luôn tìm kiếm sự hoàn hảo. Với tư duy cởi mở và tinh thần trách nhiệm cao, tôi luôn nỗ lực không ngừng để mang lại những giá trị tốt nhất. Tôi yêu thích việc giải quyết các vấn đề khó, luôn sẵn sàng học hỏi cái mới và chia sẻ kiến thức với mọi người xung quanh."
     },
+    profile: {
+      birthday: "19/06/2000",
+      hometown: "Nam Định (nay là Ninh Bình)",
+      education: "Tốt nghiệp Đại học Điện lực chuyên ngành Công nghệ phần mềm"
+    },
     nav: {
       home: "Trang chủ",
       skills: "Kỹ năng",
@@ -164,6 +169,11 @@ export const content = {
       role: "Backend Developer & Software Engineer",
       cta: "View Projects",
       about: "I am a passionate creator who always strives for perfection. With an open mind and a strong sense of responsibility, I continuously endeavor to deliver the best value. I love solving difficult problems, am always ready to learn new things, and enjoy sharing knowledge with those around me."
+    },
+    profile: {
+      birthday: "June 19, 2000",
+      hometown: "Nam Dinh (now Ninh Binh)",
+      education: "Graduated from Electric Power University - Major: Software Engineering"
     },
     nav: {
       home: "Home",

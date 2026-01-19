@@ -14,8 +14,8 @@ const ChatWidget = () => {
             id: 1, 
             role: 'model', 
             text: lang === 'vi' 
-                ? "Chào bạn! Tôi là trợ lý AI của Hiếu. Bạn có muốn hỏi gì không?\n_(Lưu ý: Do dùng phiên bản miễn phí nên số lượng câu trả lời có hạn)_" 
-                : "Hello! I'm Hieu's AI assistant. Any questions?\n_(Note: Limited responses due to free tier usage)_"
+                ? "Chào bạn! Tôi là Hiếu (AI). Bạn muốn tìm hiểu gì về mình không?\n_(Đây là phiên bản mô phỏng dựa trên hồ sơ của mình)_\n_(Lưu ý: Do dùng phiên bản miễn phí nên số lượng câu trả lời có hạn)_" 
+                : "Hello! I'm Hieu (AI). Want to know more about my work?\n_(I am an AI simulation based on my portfolio)_\n_(Note: Limited responses due to free tier usage)_"
         }
     ]);
     const [input, setInput] = useState('');
@@ -44,15 +44,16 @@ const ChatWidget = () => {
         // Prepare context
         const currentData = content[lang];
         const systemPrompt = `
-            You are "Hieu AI", a portfolio assistant. 
-            Role: Answer questions about Hieu Nguyen based on this context: ${JSON.stringify(currentData)}.
+            You are Hieu Nguyen (Software Engineer). 
+            Context: ${JSON.stringify(currentData)}.
+            Role: You are talking to a visitor. Answer as yourself ("I", "my", "me").
             Language: Answer in ${lang === 'vi' ? 'Vietnamese' : 'English'}.
             
             IMPORTANT RULES:
-            - DIRECT ANSWER ONLY. DO NOT greet (Hello, Hi) or introduce yourself again.
-            - Keep it short, concise, and friendly.
-            - If asked about contact/skills/projects, summarise from context.
-            - If the question is strictly not related to Hieu/Tech, politely refuse.
+            - DIRECT ANSWER ONLY. DO NOT start with "Hello" or "I am Hieu" unless asked.
+            - Be friendly, humble, and professional.
+            - Use the context to answer about your skills, projects, and background.
+            - If asked about something not in the context (like general knowledge), answer briefly if tech-related, otherwise politely bring it back to your portfolio.
         `;
 
         // Combine history for simple context (Limit to last 3 pairs to save tokens)
@@ -66,7 +67,7 @@ const ChatWidget = () => {
 
         try {
             const response = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${API_KEY}`,
+                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`,
                 {
                     method: "POST",
                     headers: {
@@ -134,7 +135,7 @@ const ChatWidget = () => {
                 >
                     <FaRobot size={24} />
                     <span style={styles.fabTooltip}>
-                        {lang === 'vi' ? 'Hỏi Hieu AI' : 'Ask Hieu AI'}
+                        {lang === 'vi' ? 'Trò chuyện cùng Hiếu' : 'Chat with Hieu'}
                     </span>
                 </motion.button>
             )}
@@ -155,7 +156,7 @@ const ChatWidget = () => {
                                     <FaRobot size={18} color="#fff" />
                                 </div>
                                 <div>
-                                    <h3 style={{ margin: 0, fontSize: '1rem', color: '#fff' }}>Hieu AI</h3>
+                                    <h3 style={{ margin: 0, fontSize: '1rem', color: '#fff' }}>Hieu Nguyen</h3>
                                     <span style={{ fontSize: '0.7rem', color: '#00ff88' }}>
                                         {lang === 'vi' ? 'Miễn phí (Beta)' : 'Free Tier (Beta)'}
                                     </span>

@@ -54,7 +54,7 @@ function AppContent() {
           <Route path="/search" element={<Search />} />
       </Routes>
       
-      {isHome && <WeatherNotification />}
+      {/* {isHome && <WeatherNotification />} */}
       <Cat isPlaying={isMusicPlaying} />
       {/* <TranslateWidget />
       <CalculatorWidget /> */}
