@@ -79,13 +79,15 @@ export const content = {
           title: "Project of the Year",
           date: "01/2025",
           issuer: "Newwave Solutions",
-          desc: "Giải thưởng cho dự án xuất sắc nhất năm."
+          desc: "Giải thưởng cho dự án xuất sắc nhất năm.",
+          image: "/images/poy.jpg"
         },
         {
           title: "MVP - Most Valuable Player",
           date: "08/2023",
           issuer: "Newwave Solutions",
-          desc: "Nhân viên xuất sắc nhất tháng."
+          desc: "Nhân viên xuất sắc nhất tháng.",
+          image: "/images/mvp.jpg"
         }
       ]
     },
@@ -264,13 +266,15 @@ export const content = {
           title: "Project of the Year",
           date: "01/2025",
           issuer: "Newwave Solutions",
-          desc: "Award for the most outstanding project of the year."
+          desc: "Award for the most outstanding project of the year.",
+          image: "/images/poy.jpg"
         },
         {
           title: "MVP - Most Valuable Player",
           date: "08/2023",
           issuer: "Newwave Solutions",
-          desc: "Employee of the month award."
+          desc: "Employee of the month award.",
+          image: "/images/mvp.jpg"
         }
       ]
     },

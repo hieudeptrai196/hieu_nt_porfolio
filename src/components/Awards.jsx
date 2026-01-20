@@ -1,9 +1,11 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-import { FaTrophy, FaMedal } from 'react-icons/fa';
+import { FaTrophy, FaMedal, FaTimes } from 'react-icons/fa';
 
 const Awards = () => {
   const { t } = useLanguage();
+  const [selectedAward, setSelectedAward] = useState(null);
 
   return (
     <section id="awards" className="container" style={{ padding: '4rem 20px' }}>
@@ -15,40 +17,95 @@ const Awards = () => {
         {t.awards.title}
       </motion.h2>
 
-      <div className="awards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+      <div className="awards-grid">
         {t.awards.items.map((award, index) => (
           <motion.div 
             key={index}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.2 }}
-            className="glass-card"
-            style={{ 
-                padding: '2rem', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '1.5rem',
-                border: '1px solid rgba(255, 215, 0, 0.2)', // Golden border
-                background: 'linear-gradient(145deg, rgba(255,215,0,0.05) 0%, rgba(0,0,0,0) 100%)'
-            }}
+            className="award-card"
+            onClick={() => setSelectedAward(award)}
+            layoutId={`award-card-${index}`} // For shared layout animation
           >
-            <div style={{ 
-                fontSize: '2.5rem', 
-                color: '#FFD700', 
-                filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))' 
-            }}>
-                {index === 0 ? <FaTrophy /> : <FaMedal />}
+            {/* Header: Icon + Date */}
+            <div className="award-header">
+                 <div className="award-icon-wrapper">
+                    {index === 0 ? <FaTrophy /> : <FaMedal />}
+                </div>
+                <span className="award-date-badge">
+                    {award.date}
+                </span>
             </div>
+
+            {/* Image (if exists) */}
+            {award.image && (
+                <div className="award-image-wrapper">
+                    <motion.img 
+                        layoutId={`award-img-${index}`}
+                        src={award.image} 
+                        alt={award.title}
+                        className="award-image"
+                    />
+                </div>
+            )}
             
-            <div>
-                <span style={{ color: '#FFD700', fontWeight: 'bold', display: 'block', marginBottom: '4px' }}>{award.date}</span>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--text-main)' }}>{award.title}</h3>
-                <h4 style={{ color: 'var(--text-muted)', marginBottom: '0.5rem' }}>{award.issuer}</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{award.desc}</p>
+            {/* Context */}
+            <div className="award-details">
+                <h3>{award.title}</h3>
+                <h4>{award.issuer}</h4>
+                <p>{award.desc}</p>
             </div>
           </motion.div>
         ))}
       </div>
+
+      {/* Modal for Details */}
+      <AnimatePresence>
+        {selectedAward && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="award-modal-overlay"
+            onClick={() => setSelectedAward(null)}
+          >
+            <motion.div
+              layoutId={`award-card-${t.awards.items.indexOf(selectedAward)}`}
+              className="award-modal-content"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="award-modal-close" onClick={() => setSelectedAward(null)}>
+                <FaTimes />
+              </button>
+
+              {selectedAward.image && (
+                <div className="award-modal-image-container">
+                  <motion.img
+                    layoutId={`award-img-${t.awards.items.indexOf(selectedAward)}`}
+                    src={selectedAward.image}
+                    alt={selectedAward.title}
+                    className="award-modal-image"
+                  />
+                </div>
+              )}
+
+              <div className="award-modal-details">
+                <h3 className="award-modal-title">{selectedAward.title}</h3>
+                
+                <div className="award-modal-meta">
+                   {/* Re-using badge style or similar logic if needed, but simple text is fine here */}
+                   <span className="award-date-badge">{selectedAward.date}</span>
+                   <span className="award-modal-issuer">{selectedAward.issuer}</span>
+                </div>
+                
+                <p className="award-modal-desc">{selectedAward.desc}</p>
+                {/* Could add more details if data.js supported it, like skills, link, etc. */}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
