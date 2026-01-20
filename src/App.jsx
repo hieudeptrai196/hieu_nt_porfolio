@@ -24,6 +24,7 @@ import Search from './components/Search';
 import ChatWidget from './components/ChatWidget';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { Analytics } from "@vercel/analytics/react"
 
 const Home = () => {
     return (
@@ -63,6 +64,7 @@ function AppContent() {
       <ChatWidget />
       <Footer />
       <TetCountdownPopup /> {/* TEMPORARY */}
+      <Analytics />
     </>
   );
 }
